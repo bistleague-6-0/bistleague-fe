@@ -540,7 +540,7 @@ export default function Home() {
               {/* Webinar Component Mobile */}
               <div className={`${css.webinarImageDiv}`}>
                 <img
-                  src="/images/landingpage/webinarBistLeague.jpg"
+                  src="/images/landingpage/webinar.svg"
                   alt=""
                   className={`${css.webinarImage} w-full h-full object-fit`}
                   height="57.5vw"
