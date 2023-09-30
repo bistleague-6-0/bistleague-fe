@@ -242,7 +242,7 @@ export default function Home() {
                         : css.fadeOutAnimation
                     } `}
                   >
-                    14 Agustus - 19 November
+                    25 september - 3 desember
                   </p>
                   <button
                     className={`${css.activitiesTitle}`}
@@ -472,7 +472,7 @@ export default function Home() {
                 />
               </div>
               <p className={`${css.activitiesDate}`}>
-                22 October - 19 November
+                25 September - 3 Desember
               </p>
               <h1 className={`${css.activitiesTitle}`}>Competition</h1>
               <p className={`${css.activitiesText}`}>
@@ -502,11 +502,12 @@ export default function Home() {
               <h1 className={`${css.activitiesTitle}`}>
                 Business Case Bootcamp
               </h1>
-              <p className={`${css.activitiesText}`}>Business IT bootcamp is
-              an intensive training program that combines business and
-              information technology education, offering practical skills and
-              knowledge for professionals to excel in IT-related roles within
-              the business sector.</p>
+              <p className={`${css.activitiesText}`}>
+                Business IT bootcamp is an intensive training program that
+                combines business and information technology education, offering
+                practical skills and knowledge for professionals to excel in
+                IT-related roles within the business sector.
+              </p>
               <button
                 className={`${css.bootcampButton} bg-[#943232]`}
                 onClick={() => router.push("/bootcamp")}
