@@ -25,7 +25,7 @@ export default function UserVerification() {
   };
 
   const url =
-    process.env.STAGE === "production"
+    process.env.NEXT_PUBLIC_STAGE === "production"
       ? "https://be-production-b6utdt2kwa-et.a.run.app/"
       : "https://be-staging-b6utdt2kwa-et.a.run.app/";
 

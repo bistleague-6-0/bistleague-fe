@@ -11,6 +11,6 @@ module.exports = {
     ],
   },
   env: {
-    STAGE: process.env.NEXT_PUBLIC_STAGE,
+    NEXT_PUBLIC_STAGE: process.env.NEXT_PUBLIC_STAGE,
   },
 };
