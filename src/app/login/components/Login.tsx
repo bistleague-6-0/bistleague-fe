@@ -23,7 +23,7 @@ export default function Login() {
 
     try {
       const BASE_URL =
-        process.env.NEXT_PUBLIC_STAGE === "production"
+        process.env.NEXT_PUBLIC_STAGE != "staging"
           ? "https://be-production-b6utdt2kwa-et.a.run.app"
           : "https://be-staging-b6utdt2kwa-et.a.run.app";
       const response = await axios.post(BASE_URL + "/login", data);
