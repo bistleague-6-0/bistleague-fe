@@ -19,10 +19,15 @@ export default async function CompetitionnPage() {
     const cookieStore = cookies()
     const jwt_token = cookieStore.get("jwt_token")?.value
     const user_id = cookieStore.get("user_id")?.value
+    const BASE_URL =
+    process.env.NEXT_PUBLIC_STAGE != "staging"
+      ? "https://be-production-b6utdt2kwa-et.a.run.app"
+      : "https://be-staging-b6utdt2kwa-et.a.run.app";
 
     const getProfile = async () => {
         try {
-            const response = await axios.get(`https://be-production-b6utdt2kwa-et.a.run.app/profile/${user_id}`);
+          ///profile/${user_id
+            const response = await axios.get(`${BASE_URL}/profile/${user_id}`);
 
             return response.data.data;
         } catch (error) {
