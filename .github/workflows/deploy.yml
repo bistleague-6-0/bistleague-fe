@@ -20,7 +20,7 @@ jobs:
       IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}
       GCR_TAG: ${{ github.run_id }}
       SERVICE_NAME: ${{ github.ref == 'refs/heads/main' && 'fe-production' || 'fe-staging' }}
-      REGION: asia-southeast2
+      REGION: asia-southeast1
 
     steps:
       - name: Checkout
