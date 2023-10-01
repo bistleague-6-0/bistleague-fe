@@ -232,12 +232,13 @@
 
 .activitiesHeader {
   /* font-size: 2rem; */
-  font-size: 2.504vw;
+  /* font-size: 2.504vw; */
+  font-size: 3rem;
   font-weight: bold;
   text-align: center;
   /* margin-top: 11rem; */
   /* margin-top: 13.772vw;*/ /* untuk Background yang tidak di Trim*/
-  margin-top: 17vw;
+  margin-top: 14vw;
 }
 
 @media (min-width: 1440px) {
@@ -269,11 +270,11 @@
 }
 
 .activitiesDate.fadeOutAnimation {
-  animation: fade-out 0.5s ease forwards; /* Animation name, duration, easing function, and fill mode */
+  animation: fade-out 0.15s ease forwards; /* Animation name, duration, easing function, and fill mode */
 }
 
 .activitiesDate.fadeInAnimation {
-  animation: fade-in 0.5s ease forwards; /* Animation name, duration, easing function, and fill mode */
+  animation: fade-in 0.15s ease forwards; /* Animation name, duration, easing function, and fill mode */
 }
 
 .activitiesTitle {
@@ -284,11 +285,11 @@
 }
 
 .activitiesTitle.fadeOutAnimation {
-  animation: fade-out 0.5s ease forwards; /* Animation name, duration, easing function, and fill mode */
+  animation: fade-out 0.15s ease forwards; /* Animation name, duration, easing function, and fill mode */
 }
 
 .activitiesTitle.fadeInAnimation {
-  animation: fade-in 0.5s ease forwards; /* Animation name, duration, easing function, and fill mode */
+  animation: fade-in 0.15s ease forwards; /* Animation name, duration, easing function, and fill mode */
 }
 
 .activitiesText {
@@ -296,14 +297,15 @@
   font-size: 1.252vw;
   opacity: 1;
   transition: all 0.5s fadeIn;
+  font-weight: 400;
 }
 
 .activitiesText.fadeOutAnimation {
-  animation: fade-out 0.5s ease forwards; /* Animation name, duration, easing function, and fill mode */
+  animation: fade-out 0.15s ease forwards; /* Animation name, duration, easing function, and fill mode */
 }
 
 .activitiesText.fadeInAnimation {
-  animation: fade-in 0.5s ease forwards; /* Animation name, duration, easing function, and fill mode */
+  animation: fade-in 0.15s ease forwards; /* Animation name, duration, easing function, and fill mode */
 }
 
 .activitiesButton {
@@ -355,6 +357,7 @@
   height: 29.34375vw;
   width: 29.34375vw;
   background-color: #d9d9d9;
+  position: relative;
 }
 
 .activitiesSectionForMobile {
