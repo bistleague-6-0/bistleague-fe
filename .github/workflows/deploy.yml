@@ -38,7 +38,7 @@ jobs:
       - name: Build and Push Docker image
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            docker build . -t $IMAGE_NAME/fe-production:${GCR_TAG}
+            docker build . -t $IMAGE_NAME/fe-production:${GCR_TAG} --build-arg DEPLOYMENT=production
             docker push $IMAGE_NAME/fe-production:${GCR_TAG}
           elif [ "${{ github.ref }}" = "refs/heads/staging" ]; then
             docker build . -t $IMAGE_NAME/fe-staging:${GCR_TAG} --build-arg DEPLOYMENT=staging
