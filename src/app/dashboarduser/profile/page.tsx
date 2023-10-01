@@ -13,7 +13,7 @@ export default function ProfilUser() {
   const token = cookie.get("jwt_token");
   const user_id = cookie.get("user_id");
   const url =
-    process.env.NEXT_PUBLIC_STAGE === "production"
+    process.env.NEXT_PUBLIC_STAGE == "production"
       ? "https://be-production-b6utdt2kwa-et.a.run.app/"
       : "https://be-staging-b6utdt2kwa-et.a.run.app/";
   console.log(token);
