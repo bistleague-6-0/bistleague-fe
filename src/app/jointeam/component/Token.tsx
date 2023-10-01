@@ -14,7 +14,7 @@ export default function Token() {
   const [jwtToken, setJwtToken] = useState(cookie.get("jwt_token")); // Get the JWT token from the cookie
   const [teamName, setTeamName] = useState("");
   const BASE_URL =
-    process.env.NODE_ENV === "production"
+    process.env.STAGE === "production"
       ? "https://be-production-b6utdt2kwa-et.a.run.app"
       : "https://be-staging-b6utdt2kwa-et.a.run.app";
 
