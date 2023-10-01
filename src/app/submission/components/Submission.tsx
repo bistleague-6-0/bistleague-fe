@@ -93,7 +93,7 @@ export default function Submission({
 
     try {
       const BASE_URL =
-        process.env.NEXT_PUBLIC_STAGE == "production"
+        process.env.NEXT_PUBLIC_STAGE != "staging"
           ? "https://be-production-b6utdt2kwa-et.a.run.app"
           : "https://be-staging-b6utdt2kwa-et.a.run.app";
       const submit = await axios.post(
