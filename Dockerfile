@@ -16,9 +16,6 @@ COPY . .
 # Build the Next.js application
 RUN npm run build
 
-# Read environtment stage
-ARG DEPLOYMENT=production
-
 # Expose the Next.js default port
 EXPOSE 3000
 
