@@ -36,6 +36,10 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker --quiet
 
+      - name: Generate .env file
+        run: |
+          echo "NEXT_PUBLIC_STAGE=${{ env.NEXT_PUBLIC_STAGE }}" > .env
+
       - name: Build and Push Docker image
         run: |
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
