@@ -1,14 +1,5 @@
 "use client";
 
-// import Image from "next/image";
-// import LoginPage from "./login/page";
-// import PaymentVerification from "./adminpage/component/payment";
-// import UserVerification from "./adminpage/component/user";
-// import AdnminPage from "./adminpage/page";
-// import NavUser from "./dashboarduser/component/nav";
-// import ProfilUser from "./dashboarduser/profile/page";
-// import OverviewUser from "./dashboarduser/overview";
-
 import React, { useState, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/component/Header/Header";
@@ -94,7 +85,6 @@ export default function Home() {
       >
         {/* <Header page="Home" username={username} /> */}
         <Header page="Home" />
-        <div className={`h-20 bg-white`}></div>
         <main className={css.main}>
           {/* Background Image */}
           <div
@@ -232,7 +222,13 @@ export default function Home() {
               {/* Left Side Activities */}
               <div className={`${css.activitiesLeftSide}`}>
                 {/* Competition Component Desktop */}
-                <div className={`${css.CompetitionDescription}`}>
+                <div
+                  className={`${css.CompetitionDescription} ${
+                    activities == "competetion"
+                      ? "h-64 2xl:h-[22rem] transition-[height]"
+                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
+                  }`}
+                >
                   <p
                     className={`${css.activitiesDate} 
                     
@@ -250,14 +246,7 @@ export default function Home() {
                   >
                     Competition
                   </button>
-                  <p
-                    className={`${css.activitiesText}                     
-                    ${
-                      activities == "competetion"
-                        ? css.fadeInAnimation
-                        : css.fadeOutAnimation
-                    }`}
-                  >
+                  <p className={`${css.activitiesText}`}>
                     Business IT Case Competition is one of the main events of
                     BIST League 6.0 which is a competition to hone the solve a
                     business problems related to information technology by
@@ -266,13 +255,7 @@ export default function Home() {
                     undergraduate/D3 students.
                   </p>
                   <button
-                    className={`${css.activitiesButton}                     
-                    
-                    ${
-                      activities == "competetion"
-                        ? css.fadeInAnimation
-                        : css.fadeOutAnimation
-                    } bg-[#276766]`}
+                    className={`${css.activitiesButton} bg-[#276766]`}
                     onClick={() => router.push("/competition")}
                   >
                     More About Competition
@@ -280,7 +263,13 @@ export default function Home() {
                 </div>
 
                 {/* Bootcamp Component Desktop */}
-                <div className={`${css.businessCaseDescription}`}>
+                <div
+                  className={`${css.businessCaseDescription} ${
+                    activities == "bootcamp"
+                      ? "h-64 2xl:h-[22rem] transition-[height]"
+                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
+                  }`}
+                >
                   <p
                     className={`${css.activitiesDate} 
                     ${
@@ -297,14 +286,7 @@ export default function Home() {
                   >
                     Business Case Bootcamp
                   </button>
-                  <p
-                    className={`${css.activitiesText}
-                    ${
-                      activities == "bootcamp"
-                        ? css.fadeInAnimation
-                        : css.fadeOutAnimation
-                    }`}
-                  >
+                  <p className={`${css.activitiesText}`}>
                     Business IT bootcamp is an intensive training program that
                     combines business and information technology education,
                     offering practical skills and knowledge for professionals to
@@ -312,11 +294,6 @@ export default function Home() {
                   </p>
                   <button
                     className={`${css.activitiesButton}
-                    ${
-                      activities == "bootcamp"
-                        ? css.fadeInAnimation
-                        : css.fadeOutAnimation
-                    }
                     bg-[#9E1B1B]`}
                     onClick={() => router.push("/bootcamp")}
                   >
@@ -325,7 +302,13 @@ export default function Home() {
                 </div>
 
                 {/* Mini Challenge Component Desktop */}
-                <div className={`${css.miniChallengeDescription}`}>
+                <div
+                  className={`${css.miniChallengeDescription} ${
+                    activities == "miniChallenge"
+                      ? "h-64 2xl:h-[22rem] transition-[height]"
+                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
+                  }`}
+                >
                   <p
                     className={`${css.activitiesDate} 
                     ${
@@ -345,11 +328,6 @@ export default function Home() {
                   </button>
                   <p
                     className={`${css.activitiesText}
-                    ${
-                      activities == "miniChallenge"
-                        ? css.fadeInAnimation
-                        : css.fadeOutAnimation
-                    }
                     `}
                   >
                     A video challenge that can be joined by participant and
@@ -358,11 +336,6 @@ export default function Home() {
                   </p>
                   <button
                     className={`${css.activitiesButton}
-                    ${
-                      activities == "miniChallenge"
-                        ? css.fadeInAnimation
-                        : css.fadeOutAnimation
-                    }
                     bg-[#463461]`}
                     onClick={() => router.push("/minichallenge")}
                   >
@@ -371,7 +344,13 @@ export default function Home() {
                 </div>
 
                 {/* Webinar Component Desktop */}
-                <div className={`${css.webinarDescription}`}>
+                <div
+                  className={`${css.webinarDescription} ${
+                    activities == "webinar"
+                      ? "h-64 2xl:h-[22rem] transition-[height]"
+                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
+                  }`}
+                >
                   <p
                     className={`${css.activitiesDate}
                     ${
@@ -389,25 +368,13 @@ export default function Home() {
                   >
                     Webinar
                   </button>
-                  <p
-                    className={`${css.activitiesText}
-                    ${
-                      activities == "webinar"
-                        ? css.fadeInAnimation
-                        : css.fadeOutAnimation
-                    }`}
-                  >
+                  <p className={`${css.activitiesText}`}>
                     A sharing sessions with incredible speakers from the
                     Technology industry with topics aligning with BIST League
                     6.0 theme.
                   </p>
                   <button
                     className={`${css.activitiesButton}
-                    ${
-                      activities == "webinar"
-                        ? css.fadeInAnimation
-                        : css.fadeOutAnimation
-                    }
                      bg-[#AE7120]`}
                     onClick={() => router.push("/webinar")}
                   >
@@ -447,7 +414,7 @@ export default function Home() {
                     width="57.5vw"
                   />
                   <img
-                    src="images/landingpage/webinarBistLeague.jpg"
+                    src="images/landingpage/webinarBistLeague.JPG"
                     alt=""
                     className={`${css.webinarImage} ${
                       activities == "webinar" ? "" : "hidden"
@@ -456,6 +423,16 @@ export default function Home() {
                     width="57.5vw"
                   />
                 </div>
+                <img
+                  src="images/landingpage/yellowDecor.svg"
+                  alt=""
+                  className="absolute right-12 bottom-12 2xl:right-24"
+                />
+                <img
+                  src="images/landingpage/greenDecor.svg"
+                  alt=""
+                  className="absolute -bottom-4 right-32 2xl:right-[11rem]"
+                />
               </div>
             </div>
 
@@ -540,7 +517,7 @@ export default function Home() {
               {/* Webinar Component Mobile */}
               <div className={`${css.webinarImageDiv}`}>
                 <img
-                  src="/images/landingpage/webinar.svg"
+                  src="/images/landingpage/webinarBistLeague.jpg"
                   alt=""
                   className={`${css.webinarImage} w-full h-full object-fit`}
                   height="57.5vw"
