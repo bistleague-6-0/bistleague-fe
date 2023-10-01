@@ -19,11 +19,5 @@ RUN npm run build
 # Expose the Next.js default port
 EXPOSE 3000
 
-# Read the environtment stage
-ARG DEPLOYMENT
-
-# Set environment variables
-ENV NODE_ENV=$DEPLOYMENT
-
 # Start the Next.js application
 CMD ["npm", "start"]
