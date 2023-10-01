@@ -10,6 +10,8 @@ export default function Created() {
   const router = useRouter();
   toast.success("Team created successfully!");
 
+  team_redeem_token == undefined && router.push("/login");
+
   const displayTokenDigits =
     team_redeem_token && team_redeem_token.length >= 6 ? true : false;
 

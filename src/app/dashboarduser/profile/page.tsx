@@ -4,13 +4,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import LoadingPage from "../component/loadingPage";
+import { useRouter } from "next/navigation";
 
 export default function ProfilUser() {
+  const router = useRouter();
   const [data, setData] = useState<any | null>();
   const [isLoading, setisLoading] = useState(true);
   const [trigger, setTrigger] = useState(0);
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
+  token == undefined && router.push("/login");
   const user_id = cookie.get("user_id");
   const url =
     process.env.NEXT_PUBLIC_STAGE != "staging"
