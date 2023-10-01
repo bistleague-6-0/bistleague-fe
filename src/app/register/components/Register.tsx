@@ -26,7 +26,7 @@ export default function Register() {
 
     try {
       const BASE_URL =
-        process.env.NODE_ENV === "production"
+        process.env.STAGE === "production"
           ? "https://be-production-b6utdt2kwa-et.a.run.app"
           : "https://be-staging-b6utdt2kwa-et.a.run.app";
       const response = await axios.post(BASE_URL + "/register", data);

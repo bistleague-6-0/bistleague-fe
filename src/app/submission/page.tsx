@@ -9,7 +9,7 @@ export default async function SubmissionPage() {
   const cookieStore = cookies();
   const jwt_token = cookieStore.get("jwt_token")?.value as string;
   const BASE_URL =
-    process.env.NODE_ENV === "production"
+    process.env.STAGE === "production"
       ? "https://be-production-b6utdt2kwa-et.a.run.app"
       : "https://be-staging-b6utdt2kwa-et.a.run.app";
 
