@@ -225,8 +225,8 @@ export default function Home() {
                 <div
                   className={`${css.CompetitionDescription} ${
                     activities == "competetion"
-                      ? "h-64 transition-[height]"
-                      : "h-16 overflow-hidden transition-[height]"
+                      ? "h-64 2xl:h-[22rem] transition-[height]"
+                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
                   }`}
                 >
                   <p
@@ -266,8 +266,8 @@ export default function Home() {
                 <div
                   className={`${css.businessCaseDescription} ${
                     activities == "bootcamp"
-                      ? "h-64 transition-[height]"
-                      : "h-16 overflow-hidden transition-[height]"
+                      ? "h-64 2xl:h-[22rem] transition-[height]"
+                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
                   }`}
                 >
                   <p
@@ -305,8 +305,8 @@ export default function Home() {
                 <div
                   className={`${css.miniChallengeDescription} ${
                     activities == "miniChallenge"
-                      ? "h-64 transition-[height]"
-                      : "h-16 overflow-hidden transition-[height]"
+                      ? "h-64 2xl:h-[22rem] transition-[height]"
+                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
                   }`}
                 >
                   <p
@@ -347,8 +347,8 @@ export default function Home() {
                 <div
                   className={`${css.webinarDescription} ${
                     activities == "webinar"
-                      ? "h-64 transition-[height]"
-                      : "h-16 overflow-hidden transition-[height]"
+                      ? "h-64 2xl:h-[22rem] transition-[height]"
+                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
                   }`}
                 >
                   <p
@@ -426,12 +426,12 @@ export default function Home() {
                 <img
                   src="images/landingpage/yellowDecor.svg"
                   alt=""
-                  className="absolute right-12 bottom-12"
+                  className="absolute right-12 bottom-12 2xl:right-24"
                 />
                 <img
                   src="images/landingpage/greenDecor.svg"
                   alt=""
-                  className="absolute -bottom-4 right-32"
+                  className="absolute -bottom-4 right-32 2xl:right-[11rem]"
                 />
               </div>
             </div>
