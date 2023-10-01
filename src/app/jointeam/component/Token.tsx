@@ -13,17 +13,18 @@ export default function Token() {
   const cookie = new Cookies();
   const [jwtToken, setJwtToken] = useState(cookie.get("jwt_token")); // Get the JWT token from the cookie
   const [teamName, setTeamName] = useState("");
+  const BASE_URL =
+    process.env.NODE_ENV === "production"
+      ? "https://be-production-b6utdt2kwa-et.a.run.app"
+      : "https://be-staging-b6utdt2kwa-et.a.run.app";
 
   const fetchTeamData = async () => {
     try {
-      const response = await axios.get(
-        "https://be-production-b6utdt2kwa-et.a.run.app/team",
-        {
-          headers: {
-            Authorization: `Bearer ${cookie.get("jwt_token")}`,
-          },
-        }
-      );
+      const response = await axios.get(BASE_URL + "/team", {
+        headers: {
+          Authorization: `Bearer ${cookie.get("jwt_token")}`,
+        },
+      });
 
       setTeamName(response.data.data.team_name);
       // console.log("Team Name:", teamName);
@@ -38,7 +39,7 @@ export default function Token() {
     try {
       // Make a POST request to the API endpoint
       const response = await axios.post(
-        "https://be-production-b6utdt2kwa-et.a.run.app/team/redeem",
+        BASE_URL + "/team/redeem",
         {
           redeem_code: tokenInput,
         },
@@ -53,10 +54,10 @@ export default function Token() {
       toast.success("Successfully joined team");
 
       // Update the JWT token in the state (and cookie
-      cookie.remove("jwt_token", { path: "/" })
+      cookie.remove("jwt_token", { path: "/" });
       cookie.set("jwt_token", response.data.data.jwt_token, { path: "/" });
       // console.log("JWT Token:", response.data.data.jwt_token)
-      setJwtToken(response.data.data.jwt_token); 
+      setJwtToken(response.data.data.jwt_token);
 
       setJoined(true); // Change 'joined' state to true on successful join
       fetchTeamData();
@@ -120,7 +121,7 @@ export default function Token() {
             <div
               className="bg-[#F8A22D] px-12 py-3 rounded-lg cursor-pointer"
               onClick={() => {
-                router.push("/dashboarduser")
+                router.push("/dashboarduser");
               }}
             >
               <h1 className="text-white text-center font-bold lg:text-xl">

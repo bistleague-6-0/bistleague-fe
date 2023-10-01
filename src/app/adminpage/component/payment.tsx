@@ -14,15 +14,18 @@ export default function PaymentVerification() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [teamId, setTeamId] = useState("");
-  const [trigger,setTrigger] = useState(0);
+  const [trigger, setTrigger] = useState(0);
   const cookie = new Cookies();
   const token = cookie.get("token_admin");
   const handleChange = (event: any) => {
     setTextareaValue(event.target.value);
   };
 
-  const url = "https://be-production-b6utdt2kwa-et.a.run.app/";
-  
+  const url =
+    process.env.NODE_ENV === "production"
+      ? "https://be-production-b6utdt2kwa-et.a.run.app/"
+      : "https://be-staging-b6utdt2kwa-et.a.run.app/";
+
   const getData = async (page: number) => {
     try {
       const response = await axios.get(url + "admin/payments?page=" + page, {

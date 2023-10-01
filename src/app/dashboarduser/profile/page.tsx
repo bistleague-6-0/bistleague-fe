@@ -8,11 +8,14 @@ import LoadingPage from "../component/loadingPage";
 export default function ProfilUser() {
   const [data, setData] = useState<any | null>();
   const [isLoading, setisLoading] = useState(true);
-  const [trigger,setTrigger] = useState(0);
+  const [trigger, setTrigger] = useState(0);
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
   const user_id = cookie.get("user_id");
-  const url = "https://be-production-b6utdt2kwa-et.a.run.app/";
+  const url =
+    process.env.NODE_ENV === "production"
+      ? "https://be-production-b6utdt2kwa-et.a.run.app/"
+      : "https://be-staging-b6utdt2kwa-et.a.run.app/";
   console.log(token);
 
   const getProfileData = async () => {
@@ -33,23 +36,23 @@ export default function ProfilUser() {
         const response = await axios.put(
           url + "profile",
           {
-            "full_name": data.full_name,
-            "username": data.username,
-            "email": data.email,
-            "age": data.age,
-            "address": data.address,
-            "phone_number": data.phone_number,
-            "institution": data.institution,
-            "linkedin_url": data.linkedin_url,
-            "major": data.major,
-            "entry_year": data.entry_year,
-            "line_id": data.line_id,
+            full_name: data.full_name,
+            username: data.username,
+            email: data.email,
+            age: data.age,
+            address: data.address,
+            phone_number: data.phone_number,
+            institution: data.institution,
+            linkedin_url: data.linkedin_url,
+            major: data.major,
+            entry_year: data.entry_year,
+            line_id: data.line_id,
           },
           {
             headers: {
               Authorization: "Bearer " + token,
               "Content-Type": "application/json",
-            }
+            },
           }
         );
         setTrigger(trigger + 1);

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
@@ -20,19 +20,19 @@ export default function Login() {
       password,
     };
 
-
     try {
-      const response = await axios.post(
-        "https://be-production-b6utdt2kwa-et.a.run.app/admin/login",
-        data
-      );
+      const BASE_URL =
+        process.env.NODE_ENV === "production"
+          ? "https://be-production-b6utdt2kwa-et.a.run.app"
+          : "https://be-staging-b6utdt2kwa-et.a.run.app";
+      const response = await axios.post(BASE_URL + "/admin/login", data);
 
       if (response.status === 200) {
         // // Successful login logic
         const { jwt_token, user } = response.data.data;
 
-        cookies.set('token_admin', jwt_token, { path: '/' });
-        router.push('/adminpage');
+        cookies.set("token_admin", jwt_token, { path: "/" });
+        router.push("/adminpage");
       } else {
         // Handle login error
         console.log("Login failed.");

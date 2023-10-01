@@ -55,9 +55,11 @@ const Header: React.FC<HeaderProps> = (props) => {
 
   const fetchProfileData = async () => {
     try {
-      const response = await axios.get(
-        "https://be-production-b6utdt2kwa-et.a.run.app/profile/" + user_id
-      );
+      const BASE_URL =
+        process.env.NODE_ENV === "production"
+          ? "https://be-production-b6utdt2kwa-et.a.run.app"
+          : "https://be-staging-b6utdt2kwa-et.a.run.app";
+      const response = await axios.get(BASE_URL + "/profile/" + user_id);
       setUsername(response.data.data.username);
     } catch (error) {
       console.error("Error fetching profile data:", error);

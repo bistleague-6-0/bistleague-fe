@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import axios from "axios";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
@@ -22,19 +22,20 @@ export default function Login() {
     };
 
     try {
-      const response = await axios.post(
-        "https://be-production-b6utdt2kwa-et.a.run.app/login",
-        data
-      );
+      const BASE_URL =
+        process.env.NODE_ENV === "production"
+          ? "https://be-production-b6utdt2kwa-et.a.run.app"
+          : "https://be-staging-b6utdt2kwa-et.a.run.app";
+      const response = await axios.post(BASE_URL + "/login", data);
 
       if (response.status === 200) {
         // // Successful login logic
         const { jwt_token, user } = response.data.data;
 
-        cookies.set('jwt_token', jwt_token, { path: '/' });
-        cookies.set('user_id', response.data.data.user.user_id, { path: '/' });
-        cookies.set('refresh', response.data.data.refresh_token, { path: '/' });
-        router.push("/")
+        cookies.set("jwt_token", jwt_token, { path: "/" });
+        cookies.set("user_id", response.data.data.user.user_id, { path: "/" });
+        cookies.set("refresh", response.data.data.refresh_token, { path: "/" });
+        router.push("/");
       } else {
         // Handle login error
         // console.log("Login failed.");
@@ -94,7 +95,13 @@ export default function Login() {
         </div>
         <p className="text-center hidden lg:block">
           Do not have the account yet?{" "}
-          <span className="underline cursor-pointer" onClick={() => router.push("/register")}> Register</span>{" "}
+          <span
+            className="underline cursor-pointer"
+            onClick={() => router.push("/register")}
+          >
+            {" "}
+            Register
+          </span>{" "}
         </p>
       </div>
 

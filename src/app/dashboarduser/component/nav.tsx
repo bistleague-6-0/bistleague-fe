@@ -24,7 +24,10 @@ export default function NavUser({ active }: { active?: number }) {
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
   const user_id = cookie.get("user_id");
-  const url = "https://be-production-b6utdt2kwa-et.a.run.app/";
+  const url =
+    process.env.NODE_ENV === "production"
+      ? "https://be-production-b6utdt2kwa-et.a.run.app/"
+      : "https://be-staging-b6utdt2kwa-et.a.run.app/";
   const router = useRouter();
 
   const getProfileData = async () => {

@@ -16,7 +16,6 @@ export default function Register() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-
     const data = {
       email,
       username,
@@ -26,10 +25,11 @@ export default function Register() {
     };
 
     try {
-      const response = await axios.post(
-        "https://be-production-b6utdt2kwa-et.a.run.app/register",
-        data
-      );
+      const BASE_URL =
+        process.env.NODE_ENV === "production"
+          ? "https://be-production-b6utdt2kwa-et.a.run.app"
+          : "https://be-staging-b6utdt2kwa-et.a.run.app";
+      const response = await axios.post(BASE_URL + "/register", data);
 
       if (response.status === 200) {
         // Successful login logic
@@ -101,7 +101,13 @@ export default function Register() {
             }}
           />
 
-          {username.length < 8 ? <p className="text-red-500 text-sm">Username must be {">="} 8 characters</p> : <div className="h-5"></div>}
+          {username.length < 8 ? (
+            <p className="text-red-500 text-sm">
+              Username must be {">="} 8 characters
+            </p>
+          ) : (
+            <div className="h-5"></div>
+          )}
         </div>
 
         <div className="flex flex-col gap-2 lg:mt-6 lg:hidden">
@@ -118,7 +124,7 @@ export default function Register() {
       </div>
 
       <div className="flex flex-col gap-4 mt-2 lg:mt-6 lg:flex-row lg:justify-between">
-      <div className="flex flex-col gap-2 lg:w-1/2">
+        <div className="flex flex-col gap-2 lg:w-1/2">
           <h3 className="font-bold">Password</h3>
           <input
             type="password"
@@ -140,22 +146,25 @@ export default function Register() {
               setConfirmPassword(e.target.value);
             }}
           />
-          {password != confirmPassword ? <p className="text-red-500 text-sm">Password must match</p> : <div className="h-5"></div>}
-
+          {password != confirmPassword ? (
+            <p className="text-red-500 text-sm">Password must match</p>
+          ) : (
+            <div className="h-5"></div>
+          )}
         </div>
       </div>
 
       <div className="lg:flex flex-col gap-2 lg:w-1/2 hidden">
-          <h3 className="font-bold">Email</h3>
-          <input
-            type="text"
-            placeholder="Please enter your email"
-            className="border-2 border-gray-300 rounded-lg w-full px-3 py-2 lg:px-6 lg:py-4 "
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </div>
+        <h3 className="font-bold">Email</h3>
+        <input
+          type="text"
+          placeholder="Please enter your email"
+          className="border-2 border-gray-300 rounded-lg w-full px-3 py-2 lg:px-6 lg:py-4 "
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+      </div>
 
       <div className="flex-row hidden lg:flex items-center justify-center lg:gap-2 w-full mt-3">
         <input type="checkbox" className="w-10 h-5 rounded-md cursor-pointer" />
