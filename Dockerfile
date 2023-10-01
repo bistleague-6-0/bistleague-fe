@@ -16,11 +16,14 @@ COPY . .
 # Build the Next.js application
 RUN npm run build
 
+# Read environtment stage
+ARG DEPLOYMENT=production
+
 # Expose the Next.js default port
 EXPOSE 3000
 
 # Set environment variables
-ENV NODE_ENV production
+ENV NODE_ENV $DEPLOYMENT
 
 # Start the Next.js application
 CMD ["npm", "start"]
