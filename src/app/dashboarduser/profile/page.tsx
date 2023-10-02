@@ -13,7 +13,11 @@ export default function ProfilUser() {
   const [trigger, setTrigger] = useState(0);
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
-  token == undefined && router.push("/login");
+  useEffect(() => {
+    if (token === undefined) {
+      router.push("/login");
+    }
+  }, [token, router]);
   const user_id = cookie.get("user_id");
   const url =
     process.env.NEXT_PUBLIC_STAGE != "staging"

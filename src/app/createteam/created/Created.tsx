@@ -3,6 +3,7 @@ import { AiOutlineArrowLeft } from "react-icons/ai";
 import Cookies from "universal-cookie";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Created() {
   const cookie = new Cookies();
@@ -10,7 +11,11 @@ export default function Created() {
   const router = useRouter();
   toast.success("Team created successfully!");
 
-  team_redeem_token == undefined && router.push("/login");
+  useEffect(() => {
+    if (team_redeem_token === undefined) {
+      router.push('/login');
+    }
+  }, [team_redeem_token, router]);
 
   const displayTokenDigits =
     team_redeem_token && team_redeem_token.length >= 6 ? true : false;

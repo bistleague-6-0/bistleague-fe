@@ -26,7 +26,11 @@ export default function Createteam() {
       ? "https://be-production-b6utdt2kwa-et.a.run.app"
       : "https://be-staging-b6utdt2kwa-et.a.run.app";
 
-  jwtToken == undefined && router.push("/login");
+  useEffect(() => {
+    if (jwtToken === undefined) {
+      router.push("/login");
+    }
+  }, [jwtToken, router]);
 
   const handleEmailChange = (index: number, value: string) => {
     const updatedEmails = [...emails];
@@ -67,7 +71,7 @@ export default function Createteam() {
         response: { status: number; data: { message: string } };
       };
       if (errorResponse.response.status === 401) {
-        console.log("401")
+        console.log("401");
         const response2 = await axios.post(BASE_URL + "/refresh", {
           refresh_token: refresh,
           user_id: user_id,
@@ -80,7 +84,7 @@ export default function Createteam() {
       } else if (errorResponse.response.status === 400) {
         toast.error("Please enter a valid data");
       } else {
-        toast.error("Already join a team!")
+        toast.error("Already join a team!");
       }
     } finally {
     }

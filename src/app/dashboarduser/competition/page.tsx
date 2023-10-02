@@ -43,7 +43,11 @@ export default function CompetitionUser() {
 
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
-  token == undefined && router.push("/login");
+  useEffect(() => {
+    if (token === undefined) {
+      router.push("/login");
+    }
+  }, [token, router]);
   const refresh = cookie.get("refresh");
   const user_id = cookie.get("user_id");
   // console.log(token);
@@ -102,7 +106,6 @@ export default function CompetitionUser() {
       console.log(response2);
       cookie.set("jwt_token", response2.data.data.jwt_token, { path: "/" });
       console.log(error);
-      
     } finally {
       setisLoading(false);
     }

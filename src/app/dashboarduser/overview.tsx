@@ -14,7 +14,11 @@ export default function OverviewUser() {
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
   const user_id = cookie.get("user_id");
-  token == undefined && router.push("/login");
+  useEffect(() => {
+    if (token === undefined) {
+      router.push('/login');
+    }
+  }, [token, router]);
 
   const url =
     process.env.NEXT_PUBLIC_STAGE != "staging"
