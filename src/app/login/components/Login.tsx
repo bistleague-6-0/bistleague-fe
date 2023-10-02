@@ -50,8 +50,8 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-start lg:justify-start gap-48">
-      <div className="py-16 px-14 h-screen lg:px-20 lg:py-6">
+    <div className="flex flex-start justify-center lg:justify-start gap-48">
+      <div className="py-16 px-14 lg:px-20 lg:py-6">
         <h1 className="font-extrabold text-base lg:text-2xl lg:mt-12">Login</h1>
         <h1 className="font-extrabold text-base mt-4 mb-4 lg:text-3xl">
           Hello, Welcome Back!
@@ -95,7 +95,7 @@ export default function Login() {
             Login
           </button>
         </div>
-        <p className="text-center hidden lg:block">
+        <p className="text-center text-sm lg:text-base">
           Do not have the account yet?{" "}
           <span
             className="underline cursor-pointer"

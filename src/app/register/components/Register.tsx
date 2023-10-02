@@ -47,8 +47,8 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col lg:w-1/2 self-center px-16 lg:px-4 pt-8 max-h-screen">
-      <div className="flex flex-row items-center mb-10 justify-between">
+    <div className="flex flex-col lg:w-1/2 self-center px-12 lg:px-4 pt-8 pb-4 lg:max-h-screen">
+      <div className="flex flex-row gap-2 items-center mb-10 justify-between">
         <div className="flex flex-col gap-4 lg:gap-1">
           <h1 className="font-bold lg:hidden">Register</h1>
           <h1 className="text-3xl hidden lg:block font-extrabold">
@@ -123,7 +123,7 @@ export default function Register() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 mt-2 lg:mt-6 lg:flex-row lg:justify-between">
+      <div className="flex flex-col gap-4 mt-4 lg:mt-6 lg:flex-row lg:justify-between">
         <div className="flex flex-col gap-2 lg:w-1/2">
           <h3 className="font-bold">Password</h3>
           <input
@@ -174,7 +174,17 @@ export default function Register() {
         </p>
       </div>
 
-      <div className="mt-7 flex justify-center">
+      <p className="font-semibold lg:hidden mt-6 text-center block">
+            Already have a team account?{" "}
+            <span
+              className="underline cursor-pointer"
+              onClick={() => router.push("/login")}
+            >
+              Login
+            </span>
+          </p>
+
+      <div className="mt-2 flex justify-center">
         <div
           className="cursor-pointer px-6 py-2 bg-[#F8A22D] rounded-xl lg:rounded-lg w-[119px] lg:w-[150px] max-w-sm"
           onClick={handleSubmit}
