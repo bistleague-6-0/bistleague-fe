@@ -6,6 +6,7 @@ import Header from "@/component/Header/Header";
 import Footer from "@/component/Footer/Footer";
 import css from "@/app/landing.module.css";
 import Countdown from "@/component/Countdown/Countdown";
+import Image from "next/image";
 
 export default function Home() {
   useLayoutEffect(() => {
@@ -516,12 +517,12 @@ export default function Home() {
               </button>
               {/* Webinar Component Mobile */}
               <div className={`${css.webinarImageDiv}`}>
-                <img
+                <Image
                   src="/images/landingpage/webinarBistLeague.jpg"
                   alt=""
                   className={`${css.webinarImage} w-full h-full object-fit`}
-                  height="57.5vw"
-                  width="57.5vw"
+                  width={350}
+                  height={350}
                 />
               </div>
               <p className={`${css.activitiesDate}`}>Coming Soon</p>
