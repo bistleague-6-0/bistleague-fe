@@ -151,12 +151,14 @@ export default function CompetitionUser() {
 
   const downloadpdf = () => {
     const pdfUrl = "/guidebook.pdf"; // Replace with your PDF file URL
-
+    const url = "https://gacor.bistleague.com/guidebook.pdf";
     const link = document.createElement("a");
-    link.href = pdfUrl;
-    link.target = "_blank";
+    link.href = url;
+    // link.target = "_blank";
     link.download = "Guidebook.pdf"; // Desired file name for the downloaded PDF
+    document.body.appendChild(link);
     link.click();
+    link.remove();
   };
 
   return (
@@ -165,14 +167,14 @@ export default function CompetitionUser() {
       {isNotice ? (
         <>
           <div className="fixed w-screen h-screen bg-black opacity-60"></div>
-          <div className="fixed w-screen h-screen flex justify-center items-center">
+          <div className="fixed flex items-center justify-center w-screen h-screen">
             <div className="w-[390px] md:w-[600px] bg-white rounded-lg px-8 py-6">
               <p className="text-[32px] font-bold">Notice</p>
               <p className="text-[16px]">
                 By checking this option, you consent that the information will
                 be under possession of BIST League 6.0’s committee.
               </p>
-              <div className="w-full flex justify-center mt-8 gap-4">
+              <div className="flex justify-center w-full gap-4 mt-8">
                 <button
                   onClick={() => {
                     uploadFile();
@@ -199,7 +201,7 @@ export default function CompetitionUser() {
         <>
           <div className="w-full flex flex-col lg:flex-row bg-[#F3EEE7]">
             <NavUser active={2} />
-            <div className="w-full px-6 py-6 lg:px-10 lg:py-10 flex flex-col gap-5">
+            <div className="flex flex-col w-full gap-5 px-6 py-6 lg:px-10 lg:py-10">
               <p className="text-[24px] lg:text-[32px] font-extrabold text-center lg:text-start">
                 Business IT Case Competition
               </p>
@@ -222,7 +224,7 @@ export default function CompetitionUser() {
                     : ""}
                 </p>
                 <CountDown date={date} />
-                <div className="w-full flex justify-center gap-4 mt-5">
+                <div className="flex justify-center w-full gap-4 mt-5">
                   <button
                     className="flex justify-center bg-white border-2 border-[#379392] rounded-lg text-[12px] lg:text-[16px] text-[#379392] font-extrabold px-6 lg:px-12 py-3"
                     onClick={() => downloadpdf()}
@@ -243,8 +245,8 @@ export default function CompetitionUser() {
               <p className="text-[24px] lg:text-[32px] font-extrabold text-center lg:text-start">
                 Team Profile
               </p>
-              <div className="w-full bg-white flex flex-col items-center rounded-lg gap-6 py-6 px-6 md:py-8 md:px-12">
-                <div className="w-full flex justify-between items-center">
+              <div className="flex flex-col items-center w-full gap-6 px-6 py-6 bg-white rounded-lg md:py-8 md:px-12">
+                <div className="flex items-center justify-between w-full">
                   <p className="text-[20px] lg:text-[24px] font-bold">
                     {data && data.team_name}
                   </p>
@@ -259,7 +261,7 @@ export default function CompetitionUser() {
                     </span>
                   </button>
                 </div>
-                <div className="w-full flex flex-wrap justify-center gap-6">
+                <div className="flex flex-wrap justify-center w-full gap-6">
                   <div className="w-[150px] lg:w-[250px] flex flex-col bg-[#F3EEE7] rounded-lg gap-1 px-5 py-5">
                     <p className="text-[16px] lg:text-[20px] font-bold">
                       {data && data.members[0].fullname}
@@ -368,7 +370,7 @@ export default function CompetitionUser() {
               <p className="text-[24px] lg:text-[32px] font-extrabold text-center lg:text-start">
                 Required Documents
               </p>
-              <div className="w-full bg-white flex flex-col rounded-lg gap-6 py-6 px-6 md:py-8 md:px-12">
+              <div className="flex flex-col w-full gap-6 px-6 py-6 bg-white rounded-lg md:py-8 md:px-12">
                 {data && (
                   <div className={`flex flex-col gap-1`}>
                     <p className="mt-6">Payment to one of the options:</p>
@@ -669,11 +671,11 @@ export default function CompetitionUser() {
         <>
           <div className="w-full flex flex-col lg:flex-row bg-[#F3EEE7]">
             <NavUser active={2} />
-            <div className="w-full px-6 py-6 lg:px-10 lg:py-10 flex flex-col gap-5">
+            <div className="flex flex-col w-full gap-5 px-6 py-6 lg:px-10 lg:py-10">
               <p className="text-[24px] lg:text-[32px] font-extrabold text-center lg:text-start">
                 Business IT Case Competition
               </p>
-              <div className="w-full bg-white flex flex-col items-center justify-center rounded-lg gap-6 py-6 px-6 md:py-8 md:px-12">
+              <div className="flex flex-col items-center justify-center w-full gap-6 px-6 py-6 bg-white rounded-lg md:py-8 md:px-12">
                 <p className="text-[16px] lg:text-[24px] text-center mb-2">
                   You have not registered
                 </p>
