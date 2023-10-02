@@ -17,10 +17,20 @@ export default function Createteam() {
   const [name, setName] = useState("");
   const [emails, setEmails] = useState(["", "", ""]);
   const router = useRouter();
-  const jwtToken = cookie.get("jwt_token");
+  const [jwtToken, setJwttoken] = useState(cookie.get("jwt_token"));
+  const refresh = cookie.get("refresh");
+  const user_id = cookie.get("user_id");
   const [teamName, setTeamName] = useState("");
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_STAGE != "staging"
+      ? "https://be-production-b6utdt2kwa-et.a.run.app"
+      : "https://be-staging-b6utdt2kwa-et.a.run.app";
 
-  
+  useEffect(() => {
+    if (jwtToken === undefined) {
+      router.push("/login");
+    }
+  }, [jwtToken, router]);
 
   const handleEmailChange = (index: number, value: string) => {
     const updatedEmails = [...emails];
@@ -41,32 +51,42 @@ export default function Createteam() {
     };
 
     try {
-      const response = await axios.post(
-        "https://be-production-b6utdt2kwa-et.a.run.app/team",
-        formattedData,
-        {
-          headers: {
-            Authorization: `Bearer ${jwtToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(BASE_URL + "/team", formattedData, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+          "Content-Type": "application/json",
+        },
+      });
 
       const { jwt_token } = response.data.data;
       const { team_redeem_token } = response.data.data;
-      cookie.remove("jwt_token", { path: "/" })
+      cookie.remove("jwt_token", { path: "/" });
       cookie.set("jwt_token", jwt_token, { path: "/" });
       cookie.set("team_redeem_token", team_redeem_token, { path: "/" });
 
       router.push("/createteam/created");
-      // console.log(response.data.data);
-
-      // router.push("/createteam/created");
       setSubmitted(true);
     } catch (error) {
-      console.error(error);
-      toast.error("Already Joined a Team!");
-      // Handle error here and provide feedback to the user
+      const errorResponse = error as {
+        response: { status: number; data: { message: string } };
+      };
+      if (errorResponse.response.status === 401) {
+        console.log("401");
+        const response2 = await axios.post(BASE_URL + "/refresh", {
+          refresh_token: refresh,
+          user_id: user_id,
+        });
+        console.log(response2);
+        cookie.set("jwt_token", response2.data.data.jwt_token, { path: "/" });
+        setJwttoken(response2.data.data.jwt_token);
+        console.log(error);
+        // Handle error here and provide feedback to the user
+      } else if (errorResponse.response.status === 400) {
+        toast.error("Please enter a valid data");
+      } else {
+        toast.error("Already join a team!");
+      }
+    } finally {
     }
   };
 

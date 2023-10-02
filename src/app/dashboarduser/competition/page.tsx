@@ -11,6 +11,7 @@ import { FileRejection } from "react-dropzone";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import LoadingPage from "../component/loadingPage";
+import { useRouter } from "next/navigation";
 
 interface SubmittedData {
   doc_type: string;
@@ -19,6 +20,7 @@ interface SubmittedData {
 }
 
 export default function CompetitionUser() {
+  const router = useRouter();
   const [paymentFile, setPaymentFile] = useState<File>();
   const [enrollfile, setEnrollFile] = useState<File>();
   const [studentfile, setStudentFile] = useState<File>();
@@ -41,6 +43,11 @@ export default function CompetitionUser() {
 
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
+  useEffect(() => {
+    if (token === undefined) {
+      router.push("/login");
+    }
+  }, [token, router]);
   const refresh = cookie.get("refresh");
   const user_id = cookie.get("user_id");
   // console.log(token);
@@ -91,15 +98,6 @@ export default function CompetitionUser() {
       });
       console.log(response.data.data);
       setData(response.data.data);
-      // const response2 = await axios.get(url + "profile/" + user_id);
-      // console.log(response2);
-      // setFullName(response2.data.data.full_name);
-      // for (let i = 0; i < 3; i++) {
-      //   if (response.data.data?.members[i]?.fullname == fullName) {
-      //     setIsLeader(i);
-      //     console.log(i);
-      //   }
-      // }
     } catch (error) {
       const response2 = await axios.post(url + "refresh", {
         refresh_token: refresh,

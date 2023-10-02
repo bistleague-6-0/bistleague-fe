@@ -12,6 +12,7 @@ export default function Login() {
   const router = useRouter();
 
   const cookies = new Cookies();
+  console.log(cookies.get("jwt_token"));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ export default function Login() {
           ? "https://be-production-b6utdt2kwa-et.a.run.app"
           : "https://be-staging-b6utdt2kwa-et.a.run.app";
       const response = await axios.post(BASE_URL + "/login", data);
+
 
       if (response.status === 200) {
         // // Successful login logic
