@@ -5,13 +5,21 @@ import NavUser from "./component/nav";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LoadingPage from "./component/loadingPage";
+import { useRouter } from "next/navigation";
 
 export default function OverviewUser() {
+  const router = useRouter();
   const [teamId, setTeamId] = useState("");
   const [isLoading, setisLoading] = useState(true);
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
   const user_id = cookie.get("user_id");
+  useEffect(() => {
+    if (token === undefined) {
+      router.push('/login');
+    }
+  }, [token, router]);
+
   const url =
     process.env.NEXT_PUBLIC_STAGE != "staging"
       ? "https://be-production-b6utdt2kwa-et.a.run.app/"
@@ -32,6 +40,13 @@ export default function OverviewUser() {
   useEffect(() => {
     getProfileData();
   }, []);
+
+  useEffect(() => {
+    if (token === undefined) {
+      router.push("/login");
+    }
+  }, [token, router]);
+
   return (
     <>
       <LoadingPage isLoad={isLoading} />

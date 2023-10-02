@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { useRouter } from "next/navigation";
 
 export default function PaymentVerification() {
   const [popupUrl, setPopupUrl] = useState<string | null>(null);
@@ -17,6 +18,7 @@ export default function PaymentVerification() {
   const [trigger, setTrigger] = useState(0);
   const cookie = new Cookies();
   const token = cookie.get("token_admin");
+  const router = useRouter();
   const handleChange = (event: any) => {
     setTextareaValue(event.target.value);
   };
@@ -87,6 +89,12 @@ export default function PaymentVerification() {
   useEffect(() => {
     getData(1);
   }, [trigger]);
+
+  useEffect(() => {
+    if (token === undefined) {
+      router.push("/login");
+    }
+  }, [token, router]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

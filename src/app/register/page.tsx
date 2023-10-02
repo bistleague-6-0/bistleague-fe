@@ -17,7 +17,7 @@ export default function RegisterPage() {
         <Register />
       </div> */}
 
-      <div className=" flex gap-14 lg:h-screen">
+      <div className=" flex justify-center items-center gap-14 h-full lg:h-screen bg-[#F3EEE7] lg:bg-white">
         <Image
           src="/images/register/register-web.svg"
           width={200}

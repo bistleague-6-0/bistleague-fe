@@ -12,6 +12,7 @@ export default function Login() {
   const router = useRouter();
 
   const cookies = new Cookies();
+  console.log(cookies.get("jwt_token"));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ export default function Login() {
           ? "https://be-production-b6utdt2kwa-et.a.run.app"
           : "https://be-staging-b6utdt2kwa-et.a.run.app";
       const response = await axios.post(BASE_URL + "/login", data);
+
 
       if (response.status === 200) {
         // // Successful login logic
@@ -48,8 +50,8 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-start lg:justify-start gap-48">
-      <div className="py-16 px-14 h-screen lg:px-20 lg:py-6">
+    <div className="flex flex-start justify-center lg:justify-start gap-48">
+      <div className="py-16 px-14 lg:px-20 lg:py-6">
         <h1 className="font-extrabold text-base lg:text-2xl lg:mt-12">Login</h1>
         <h1 className="font-extrabold text-base mt-4 mb-4 lg:text-3xl">
           Hello, Welcome Back!
@@ -93,7 +95,7 @@ export default function Login() {
             Login
           </button>
         </div>
-        <p className="text-center hidden lg:block">
+        <p className="text-center text-sm lg:text-base">
           Do not have the account yet?{" "}
           <span
             className="underline cursor-pointer"

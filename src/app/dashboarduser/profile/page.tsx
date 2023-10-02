@@ -4,19 +4,28 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import LoadingPage from "../component/loadingPage";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+
 
 export default function ProfilUser() {
+  const router = useRouter();
   const [data, setData] = useState<any | null>();
   const [isLoading, setisLoading] = useState(true);
   const [trigger, setTrigger] = useState(0);
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
+  const refresh = cookie.get("refresh");
+  useEffect(() => {
+    if (token === undefined) {
+      router.push("/login");
+    }
+  }, [token, router]);
   const user_id = cookie.get("user_id");
   const url =
     process.env.NEXT_PUBLIC_STAGE != "staging"
       ? "https://be-production-b6utdt2kwa-et.a.run.app/"
       : "https://be-staging-b6utdt2kwa-et.a.run.app/";
-  console.log(token);
 
   const getProfileData = async () => {
     try {
@@ -56,9 +65,18 @@ export default function ProfilUser() {
           }
         );
         setTrigger(trigger + 1);
-        console.log("Profile edited:", response.data);
+        toast.success("Profile edited");
       } catch (error) {
-        console.log(error);
+        toast.error("Please fill all fields");
+        const response2 = await axios.post(url + "refresh", {
+          refresh_token: refresh,
+          user_id: user_id,
+        });
+        if (response2.status == 404) {
+          router.push("/login");
+        } else {
+          cookie.set("jwt_token", response2.data.data.jwt_token, { path: "/" });
+        }
       }
     }
   };
@@ -142,7 +160,7 @@ export default function ProfilUser() {
                   Age
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   id="age"
                   placeholder="Please enter your age"
                   className="w-full lg:w-72 xl:w-96 border-2 border-[#BDBDBD] rounded-sm px-2 lg:px-5 py-3"
@@ -150,7 +168,7 @@ export default function ProfilUser() {
                   onChange={(e) =>
                     setData((prevData: any) => ({
                       ...prevData,
-                      age: e.target.value,
+                      age: parseInt(e.target.value, 10),
                     }))
                   }
                 />
@@ -286,7 +304,7 @@ export default function ProfilUser() {
                   Entry Year
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   id="entry year"
                   placeholder="Please enter your entry year"
                   className="w-full lg:w-72 xl:w-96 border-2 border-[#BDBDBD] rounded-sm px-2 lg:px-5 py-3"
@@ -294,7 +312,7 @@ export default function ProfilUser() {
                   onChange={(e) =>
                     setData((prevData: any) => ({
                       ...prevData,
-                      entry_year: e.target.value,
+                      entry_year: parseInt(e.target.value, 10),
                     }))
                   }
                 />
