@@ -232,7 +232,12 @@ export default function CompetitionUser() {
                 <div className="flex justify-center w-full gap-4 mt-5">
                   <button
                     className="flex justify-center bg-white border-2 border-[#379392] rounded-lg text-[12px] lg:text-[16px] text-[#379392] font-extrabold px-6 lg:px-12 py-3"
-                    onClick={() => downloadpdf()}
+                    onClick={() =>
+                      window.open(
+                        "https://drive.google.com/file/d/1_ccLEBqGZ1BZo8C6Rf9VclMyBgh-xLGL/view",
+                        "_blank"
+                      )
+                    }
                   >
                     {fase >= 1 && fase <= 3
                       ? "Download Guidebook"
