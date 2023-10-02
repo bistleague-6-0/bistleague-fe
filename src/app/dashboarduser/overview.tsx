@@ -40,6 +40,13 @@ export default function OverviewUser() {
   useEffect(() => {
     getProfileData();
   }, []);
+
+  useEffect(() => {
+    if (token === undefined) {
+      router.push("/login");
+    }
+  }, [token, router]);
+
   return (
     <>
       <LoadingPage isLoad={isLoading} />
