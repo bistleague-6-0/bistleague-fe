@@ -121,7 +121,7 @@ export default function Createteam() {
               onChange={(e) => setName(e.target.value)}
             />
             {name == "" ? (
-              <p className="text-[#413687] text-sm">Team must not be empty</p>
+              <p className="text-[#413687] text-sm">Team must not be empty and {">="} 8 characters</p>
             ) : (
               <div className="h-5"></div>
             )}
