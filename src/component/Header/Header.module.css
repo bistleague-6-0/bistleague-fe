@@ -89,7 +89,7 @@
 }
 
 .logo {
-  width: 60px;
+  width: 60%;
   height: auto;
   margin: 12px 0px 12px 12px;
 }
@@ -148,6 +148,7 @@
 @media (max-width: 1014px) {
   .outer {
     gap: 5px;
+    /* height: 3.5rem; */
   }
 }
 
@@ -160,6 +161,8 @@
 @media (max-width: 991px) {
   .outer {
     justify-content: space-between;
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
 
   .topleftusername {
@@ -172,6 +175,10 @@
 
   .navbarToggle {
     display: block;
+    width: 25%;
+  }
+  .logo{
+    width: 40%;
   }
 
   .overlay.show {
