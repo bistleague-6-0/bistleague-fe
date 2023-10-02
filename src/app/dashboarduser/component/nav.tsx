@@ -164,6 +164,13 @@ export default function NavUser({ active }: { active?: number }) {
           <LuArrowUpRightFromCircle size={24} />
           <p className="text-[18px] font-bold">Mini Challenge</p>
         </div>
+
+        <div
+          onClick={() => router.push("/")}
+          className={`w-full gap-2 text-center bg-transparent rounded-lg text-white text-[18px] font-bold cursor-pointer mt-6 py-2 hover:bg-[#F3EEE7] hover:text-[#E22727]`}
+        >
+          Back to Home
+        </div>
       </div>
       <div className="w-full h-16 bg-[#F3EEE7] flex items-center justify-between lg:hidden px-5 py-3 text-[#E22727]">
         <div className="flex items-center gap-2 text-[18px] font-bold">
@@ -212,18 +219,18 @@ export default function NavUser({ active }: { active?: number }) {
         <>
           <div className="fixed w-full h-full bg-gradient-to-b from-red-600 to-orange-500 flex flex-col items-center justify-between py-20 z-20">
             <div className="w-full flex flex-col items-center justify-center">
-            <div
-              className="w-full flex justify-center cursor-pointer"
-              onClick={() => router.push("/")}
-            >
-              <Image
-                src="/images/adminpage/bist.svg"
-                width={100}
-                height={100}
-                alt=""
-                className="text-center"
-              />
-            </div>
+              <div
+                className="w-full flex justify-center cursor-pointer"
+                onClick={() => router.push("/")}
+              >
+                <Image
+                  src="/images/adminpage/bist.svg"
+                  width={100}
+                  height={100}
+                  alt=""
+                  className="text-center"
+                />
+              </div>
               <div
                 onClick={() => router.push("/dashboarduser")}
                 className={`w-full gap-2 text-center ${
@@ -280,6 +287,13 @@ export default function NavUser({ active }: { active?: number }) {
                 } text-[18px] font-bold cursor-pointer py-2 hover:bg-[#F3EEE7] hover:text-[#E22727]`}
               >
                 Mini Challenge
+              </div>
+
+              <div
+                onClick={() => router.push("/")}
+                className={`w-full gap-2 text-center bg-transparent text-white text-[18px] font-bold cursor-pointer mt-6 py-2 hover:bg-[#F3EEE7] hover:text-[#E22727]`}
+              >
+                Back to Home
               </div>
             </div>
           </div>
