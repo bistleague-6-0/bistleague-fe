@@ -152,13 +152,18 @@ export default function CompetitionUser() {
   const downloadpdf = () => {
     const pdfUrl = "/guidebook.pdf"; // Replace with your PDF file URL
     const url = "https://gacor.bistleague.com/guidebook.pdf";
-    const link = document.createElement("a");
-    link.href = url;
-    // link.target = "_blank";
-    link.download = "Guidebook.pdf"; // Desired file name for the downloaded PDF
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+    fetch(url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const blobUrl = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        // link.target = "_blank";
+        link.download = "Guidebook.pdf"; // Desired file name for the downloaded PDF
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      });
   };
 
   return (
