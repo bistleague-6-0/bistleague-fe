@@ -25,6 +25,7 @@ export default function NavUser({ active }: { active?: number }) {
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
   const user_id = cookie.get("user_id");
+  const refresh = cookie.get("refresh");
   const url =
     process.env.NEXT_PUBLIC_STAGE != "staging"
       ? "https://be-production-b6utdt2kwa-et.a.run.app/"
@@ -53,7 +54,16 @@ export default function NavUser({ active }: { active?: number }) {
       console.log(response.data.data);
       setTeamName(response.data.data.team_name);
     } catch (error) {
-      console.log(error);
+      const response2 = await axios.post(url + "refresh", {
+        refresh_token: refresh,
+        user_id: user_id,
+      });
+      if (response2.status == 404) {
+        router.push("/login");
+      } else {
+        console.log(response2);
+        cookie.set("jwt_token", response2.data.data.jwt_token, { path: "/" });
+      }
     } finally {
       setisLoading(false);
     }
@@ -62,6 +72,12 @@ export default function NavUser({ active }: { active?: number }) {
   useEffect(() => {
     getProfileData();
   }, []);
+
+  useEffect(() => {
+    if (token === undefined) {
+      router.push("/login");
+    }
+  }, [token, router]);
 
   useEffect(() => {
     getTeamData();
@@ -196,13 +212,25 @@ export default function NavUser({ active }: { active?: number }) {
         <>
           <div className="fixed w-full h-full bg-gradient-to-b from-red-600 to-orange-500 flex flex-col items-center justify-between py-20 z-20">
             <div className="w-full flex flex-col items-center justify-center">
+            <div
+              className="w-full flex justify-center cursor-pointer"
+              onClick={() => router.push("/")}
+            >
+              <Image
+                src="/images/adminpage/bist.svg"
+                width={100}
+                height={100}
+                alt=""
+                className="text-center"
+              />
+            </div>
               <div
                 onClick={() => router.push("/dashboarduser")}
                 className={`w-full gap-2 text-center ${
                   active == 0
                     ? "bg-[#F3EEE7] text-[#E22727]"
                     : "bg-transparent text-white"
-                } text-[18px] font-bold cursor-pointer py-2 hover:bg-[#F3EEE7] hover:text-[#E22727]`}
+                } text-[18px] font-bold cursor-pointer mt-6 py-2 hover:bg-[#F3EEE7] hover:text-[#E22727]`}
               >
                 Overview
               </div>

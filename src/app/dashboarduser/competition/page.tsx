@@ -12,6 +12,7 @@ import Cookies from "universal-cookie";
 import axios from "axios";
 import LoadingPage from "../component/loadingPage";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface SubmittedData {
   doc_type: string;
@@ -127,10 +128,11 @@ export default function CompetitionUser() {
           "Content-Type": "application/json",
         },
       });
-      console.log("success");
       setTrigger(trigger + 1);
+      toast.success("Upload data berhasil");
     } catch (error) {
       console.log(error);
+      toast.error("Gagal upload. Silahkan upload ulang");
     }
   };
 
