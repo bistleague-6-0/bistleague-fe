@@ -103,9 +103,12 @@ export default function CompetitionUser() {
         refresh_token: refresh,
         user_id: user_id,
       });
-      console.log(response2);
-      cookie.set("jwt_token", response2.data.data.jwt_token, { path: "/" });
-      console.log(error);
+      if(response2.status == 404){
+        router.push("/login");
+      }else{
+        console.log(response2);
+        cookie.set("jwt_token", response2.data.data.jwt_token, { path: "/" });
+      }
     } finally {
       setisLoading(false);
     }

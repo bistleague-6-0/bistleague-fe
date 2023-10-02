@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function NavUser({ active }: { active?: number }) {
   const [hamburger, setHamburger] = useState(false);
@@ -68,7 +69,19 @@ export default function NavUser({ active }: { active?: number }) {
   return (
     <>
       <div className="hidden lg:w-1/5 lg:bg-gradient-to-b lg:from-red-600 lg:to-orange-500 lg:flex lg:flex-col lg:px-3 lg:py-12">
-        <div className="w-full rounded-lg bg-[#F3EEE7] px-4 py-4 mb-8">
+        <div
+          className="w-full flex justify-center cursor-pointer"
+          onClick={() => router.push("/")}
+        >
+          <Image
+            src="/images/adminpage/bist.svg"
+            width={100}
+            height={100}
+            alt=""
+            className="text-center"
+          />
+        </div>
+        <div className="w-full rounded-lg bg-[#F3EEE7] px-4 py-4 mb-8 mt-6">
           <p className="text-[20px] font-bold mb-[2px]">{fullName}</p>
           <p className="text-[12px] font-bold">{teamName}</p>
         </div>
