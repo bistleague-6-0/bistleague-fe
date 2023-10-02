@@ -1,9 +1,9 @@
-import OverviewUser from "./overview"
+import OverviewUser from "./overview";
 
 export default function UserPage() {
-    return(
-        <>
-            <OverviewUser/>
-        </>
-    )
+  return (
+    <>
+      <OverviewUser />
+    </>
+  );
 }
