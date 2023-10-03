@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -32,13 +33,14 @@ export default function Login() {
         const { jwt_token, user } = response.data.data;
 
         cookies.set("token_admin", jwt_token, { path: "/" });
+        toast.success('Login successfull');
         router.push("/adminpage");
       } else {
         // Handle login error
-        console.log("Login failed.");
+       toast.error("Login failed.");
       }
     } catch (error) {
-      console.error("Error logging in:", error);
+      toast.error("Login failed.")
     }
   };
 

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone, FileRejection } from "react-dropzone";
+import toast from "react-hot-toast";
 import { BsFileEarmarkArrowUpFill } from "react-icons/bs";
 import { IoCloseSharp } from "react-icons/io5";
 
@@ -21,13 +22,22 @@ const Dropzone: React.FC<DropzoneProps> = ({
   const [file, setFile] = useState<File>();
   const handleDrop = useCallback(
     (acceptedFiles: File[], fileRejections: FileRejection[]) => {
-      if (acceptedFiles.length > 0) {
+      if (fileRejections.length > 0) {
+        const imageFiles = acceptedFiles.filter((file) =>
+          file.type.startsWith("image/")
+        );
+        if (imageFiles.length > 0) {
+          setFile(imageFiles[0]);
+          onFileDeleted();
+        } else {
+          if (onFileRejected) {
+            onFileRejected(fileRejections);
+            toast.error("jangan pdf");
+          }
+        }
+      } else if (acceptedFiles.length > 0) {
         setFile(acceptedFiles[0]);
         onFileDeleted();
-      }
-
-      if (onFileRejected && fileRejections.length > 0) {
-        onFileRejected(fileRejections);
       }
     },
     [onFileRejected, onFileDeleted]
