@@ -240,38 +240,47 @@ const Header: React.FC<HeaderProps> = (props) => {
             </button>
           </li>
 
-          <li className={`${props.page === "Home" ? css.activeLi : ""}`}>
-            <button onClick={() => router.push("/")}>Home</button>
+          <li
+            className={`${props.page === "Home" ? css.activeLi : ""}`}
+            onClick={() => router.push("/")}
+          >
+            <button>Home</button>
           </li>
 
-          <li className={props.page === "Competition" ? css.activeLi : ""}>
-            <button onClick={() => router.push("/competition")}>
-              Competition
-            </button>
+          <li
+            className={props.page === "Competition" ? css.activeLi : ""}
+            onClick={() => router.push("/competition")}
+          >
+            <button>Competition</button>
           </li>
 
-          <li className={props.page === "Bootcamp" ? css.activeLi : ""}>
-            <button onClick={() => router.push("/bootcamp")}>Bootcamp</button>
+          <li
+            className={props.page === "Bootcamp" ? css.activeLi : ""}
+            onClick={() => router.push("/bootcamp")}
+          >
+            <button>Bootcamp</button>
           </li>
 
-          <li className={props.page === "Webinar" ? css.activeLi : ""}>
-            <button onClick={() => router.push("/webinar")}>Webinar</button>
+          <li
+            className={props.page === "Webinar" ? css.activeLi : ""}
+            onClick={() => router.push("/webinar")}
+          >
+            <button>Webinar</button>
           </li>
 
-          <li className={props.page === "Mini Challenge" ? css.activeLi : ""}>
-            <button onClick={() => router.push("/minichallenge")}>
-              Mini Challenge
-            </button>
+          <li
+            className={props.page === "Mini Challenge" ? css.activeLi : ""}
+            onClick={() => router.push("/minichallenge")}
+          >
+            <button>Mini Challenge</button>
           </li>
 
           {username === null ? (
-            <li className={`flex justify-center ${css.backButtonSection}`}>
-              <button
-                className={`${css.registerButton}`}
-                onClick={() => router.push("/register")}
-              >
-                Register
-              </button>
+            <li
+              className={`flex justify-center ${css.backButtonSection}`}
+              onClick={() => router.push("/register")}
+            >
+              <button className={`${css.registerButton}`}>Register</button>
             </li>
           ) : (
             <li>
@@ -303,6 +312,7 @@ const Header: React.FC<HeaderProps> = (props) => {
               className={`${css.profileLi} ${
                 dropdownLiToggleClicked ? css.show : ""
               }`}
+              onClick={() => router.push("/dashboarduser")}
             >
               <button>Dashboard</button>
             </li>
@@ -311,6 +321,7 @@ const Header: React.FC<HeaderProps> = (props) => {
               className={`${css.profileLi} ${
                 dropdownLiToggleClicked ? css.show : ""
               }`}
+              onClick={signOutHandler}
             >
               <button>Sign Out</button>
             </li>

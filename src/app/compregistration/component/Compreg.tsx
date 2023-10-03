@@ -26,9 +26,9 @@ export default function Compreg() {
           </div>
         </div>
 
-        <div className="flex flex-col bg-white px-10 py-7 lg:py-14 gap-8 lg:gap-12 rounded-lg mt-8 max-w-sm">
+        <div className="flex w-full flex-col bg-white px-10 py-7 lg:py-14 gap-8 lg:gap-12 rounded-lg mt-8 max-w-sm">
           <h1 className="text-center text-lg lg:text-xl">
-            Already have a team or you are a team member?
+            Already have a team and want to join?
           </h1>
           <div className="bg-[#F8A22D] py-3 rounded-lg cursor-pointer" onClick={() => router.push("/jointeam")}>
             <h1 className="text-white text-center font-bold lg:text-xl">

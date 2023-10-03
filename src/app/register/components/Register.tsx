@@ -174,17 +174,7 @@ export default function Register() {
         </p>
       </div>
 
-      <p className="font-semibold lg:hidden mt-6 text-center block">
-            Already have a team account?{" "}
-            <span
-              className="underline cursor-pointer"
-              onClick={() => router.push("/login")}
-            >
-              Login
-            </span>
-          </p>
-
-      <div className="mt-2 flex justify-center">
+      <div className="mt-6 lg:mt-2 flex justify-center">
         <div
           className="cursor-pointer px-6 py-2 bg-[#F8A22D] rounded-xl lg:rounded-lg w-[119px] lg:w-[150px] max-w-sm"
           onClick={handleSubmit}
@@ -192,6 +182,16 @@ export default function Register() {
           <h1 className="text-white text-center font-bold">Register</h1>
         </div>
       </div>
+
+      <p className="font-light text-sm lg:hidden text-center block">
+        Already have a team account?{" "}
+        <span
+          className="underline cursor-pointer"
+          onClick={() => router.push("/login")}
+        >
+          Login
+        </span>
+      </p>
     </div>
   );
 }

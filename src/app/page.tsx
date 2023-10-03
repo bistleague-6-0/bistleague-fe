@@ -8,6 +8,8 @@ import css from "@/app/landing.module.css";
 import Countdown from "@/component/Countdown/Countdown";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import Image from "next/image";
+
 
 export default function Home() {
   const cookieStore = new Cookies();
@@ -544,12 +546,12 @@ export default function Home() {
               </button>
               {/* Webinar Component Mobile */}
               <div className={`${css.webinarImageDiv}`}>
-                <img
-                  src="/images/landingpage/webinarBistLeague.jpg"
+                <Image
+                  src="/images/landingpage/webinarBistLeague.JPG"
                   alt=""
                   className={`${css.webinarImage} w-full h-full object-fit`}
-                  height="57.5vw"
-                  width="57.5vw"
+                  width={350}
+                  height={350}
                 />
               </div>
               <p className={`${css.activitiesDate}`}>Coming Soon</p>

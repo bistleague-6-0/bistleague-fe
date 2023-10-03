@@ -1066,6 +1066,10 @@
   .backgroundImage {
     display: none;
   }
+  
+  .body {
+    padding-top: 35px;
+  }
 
   .backgroundImageMobile {
     display: block;
