@@ -102,10 +102,10 @@ export default function UserVerification() {
   useEffect(() => {
     getData(1);
   }, [trigger]);
-  
+
   useEffect(() => {
     if (token === undefined) {
-      router.push("/login");
+      router.push("/adminlogin");
     }
   }, [token, router]);
 
@@ -168,11 +168,7 @@ export default function UserVerification() {
               <th className="px-4 py-5">No</th>
               <th className="px-12">Nama Tim</th>
               <th className="px-12">Nama User</th>
-              <th className="px-6">
-                Proof of <br />
-                Enrolment
-              </th>
-              <th className="px-6">Student Card</th>
+              <th className="px-6">Active Student</th>
               <th className="px-6">Self Portrait</th>
               <th className="px-6">Twibbon</th>
               <th className="px-6">Profile</th>
@@ -185,33 +181,6 @@ export default function UserVerification() {
                 <td className="px-12 py-2 text-center">{row.team_name}</td>
                 <td className="px-12 py-2">{row.full_name}</td>
 
-                <td className="px-6 py-2">
-                  <button
-                    className="bg-[#40A89F] rounded-lg flex items-center gap-1 text-white px-4 py-1 z-20"
-                    onClick={() => {
-                      setPopupUrl(row.enrollment_url);
-                      setUid(row.uid);
-                      setDoc("enrollment");
-                    }}
-                  >
-                    <p className="text-white">Open</p>
-                    <MdOpenInNew />
-                  </button>
-                  <div
-                    className={`flex items-center ${
-                      row.enrollment_status == "accepted"
-                        ? "text-[#27AE60]"
-                        : row.enrollment_status == "rejected"
-                        ? "text-[#EB5757]"
-                        : row.enrollment_status == "under review"
-                        ? "text-[#E2B93B]"
-                        : "text-[#4F4F4F]"
-                    }`}
-                  >
-                    <HiOutlineInformationCircle />
-                    <p className="text-[14px]">{row.enrollment_status}</p>
-                  </div>
-                </td>
                 <td className="px-6 py-2">
                   <button
                     className="bg-[#40A89F] rounded-lg flex items-center gap-1 text-white px-4 py-1"
@@ -410,12 +379,12 @@ export default function UserVerification() {
                 </p>
               </div>
               <div className="w-full h-1 bg-[#379392] mb-2"></div>
-              <div className="w-full flex justify-between mb-3">
+              <div className="w-full grid grid-cols-2 mx-auto gap-x-1 max-w-screen-md">
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">
                     Full Name
                   </p>
-                  <p className="text-black text-[18px]">
+                  <p className="text-black text-[18px] overflow-auto">
                     {showProfile.full_name}
                   </p>
                 </div>
@@ -423,27 +392,25 @@ export default function UserVerification() {
                   <p className="font-bold text-[#379392] text-[24px]">
                     Username
                   </p>
-                  <p className="text-black text-[18px]">
+                  <p className="text-black text-[18px] overflow-auto">
                     {showProfile.username}
                   </p>
                 </div>
-              </div>
-              <div className="w-full flex justify-between mb-3">
+
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">Email</p>
-                  <p className="text-black text-[18px]">{showProfile.email}</p>
+                  <p className="text-black text-[18px] overflow-auto">{showProfile.email}</p>
                 </div>
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">Age</p>
-                  <p className="text-black text-[18px]">{showProfile.age}</p>
+                  <p className="text-black text-[18px] overflow-auto">{showProfile.age}</p>
                 </div>
-              </div>
-              <div className="w-full flex justify-between mb-3">
+
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">
                     Address
                   </p>
-                  <p className="text-black text-[18px]">
+                  <p className="text-black text-[18px] overflow-auto">
                     {showProfile.address}
                   </p>
                 </div>
@@ -451,17 +418,16 @@ export default function UserVerification() {
                   <p className="font-bold text-[#379392] text-[24px]">
                     Phone Number
                   </p>
-                  <p className="text-black text-[18px]">
+                  <p className="text-black text-[18px] overflow-auto">
                     {showProfile.phone_number}
                   </p>
                 </div>
-              </div>
-              <div className="w-full flex justify-between mb-3">
+
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">
                     Institution
                   </p>
-                  <p className="text-black text-[18px]">
+                  <p className="text-black text-[18px] overflow-auto">
                     {showProfile.institution}
                   </p>
                 </div>
@@ -469,31 +435,29 @@ export default function UserVerification() {
                   <p className="font-bold text-[#379392] text-[24px]">
                     LinkedIn
                   </p>
-                  <p className="text-black text-[18px]">
+                  <p className="text-black text-[18px] overflow-auto">
                     {showProfile.linkedin_url}
                   </p>
                 </div>
-              </div>
-              <div className="w-full flex justify-between mb-3">
+
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">Major</p>
-                  <p className="text-black text-[18px]">{showProfile.major}</p>
+                  <p className="text-black text-[18px] overflow-auto">{showProfile.major}</p>
                 </div>
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">
                     ID Line
                   </p>
-                  <p className="text-black text-[18px]">
+                  <p className="text-black text-[18px] overflow-auto">
                     {showProfile.line_id}
                   </p>
                 </div>
-              </div>
-              <div className="w-full flex justify-between">
+
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">
                     Entry Year
                   </p>
-                  <p className="text-black text-[18px]">
+                  <p className="text-black text-[18px] overflow-auto">
                     {showProfile.entry_year}
                   </p>
                 </div>

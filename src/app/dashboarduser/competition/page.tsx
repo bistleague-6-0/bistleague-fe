@@ -24,7 +24,6 @@ interface SubmittedData {
 export default function CompetitionUser() {
   const router = useRouter();
   const [paymentFile, setPaymentFile] = useState<File>();
-  const [enrollfile, setEnrollFile] = useState<File>();
   const [studentfile, setStudentFile] = useState<File>();
   const [selfFile, setSelfFile] = useState<File>();
   const [twibbonfile, setTwibbonFile] = useState<File>();
@@ -122,6 +121,24 @@ export default function CompetitionUser() {
   };
 
   const uploadFile = async () => {
+    if (paymentFile && paymentFile.type === "application/pdf") {
+      toast.error("PDF files are not allowed. Please upload image files only.");
+      setFileName("");
+      setTrigger(trigger + 1);
+      return;
+    } else if (studentfile && studentfile.type === "application/pdf") {
+      toast.error("PDF files are not allowed. Please upload image files only.");
+      setTrigger(trigger + 1);
+      return;
+    } else if (selfFile && selfFile.type === "application/pdf") {
+      toast.error("PDF files are not allowed. Please upload image files only.");
+      setTrigger(trigger + 1);
+      return;
+    } else if (twibbonfile && twibbonfile.type === "application/pdf") {
+      toast.error("PDF files are not allowed. Please upload image files only.");
+      setTrigger(trigger + 1);
+      return;
+    }
     const submittedData: SubmittedData = {
       doc_type: docType,
       document: base64,
@@ -135,15 +152,27 @@ export default function CompetitionUser() {
         },
       });
       setTrigger(trigger + 1);
-      toast.success("Upload data berhasil");
+      toast.success("Upload data success");
     } catch (error) {
       console.log(error);
-      toast.error("Gagal upload. Silahkan upload ulang");
+      toast.error("Upload data failed. Please try again");
       setTrigger(trigger + 1);
     }
   };
 
-  const handleFileRejected = (fileRejections: FileRejection[]) => {};
+  const handleFileRejected = (fileRejections: FileRejection[]) => {
+    const rejectedFiles = fileRejections.map(
+      (rejectedFile) => rejectedFile.file
+    );
+
+    const pdfFiles = rejectedFiles.filter(
+      (file) => file.type === "application/pdf"
+    );
+
+    if (pdfFiles.length > 0) {
+      toast.error("PDF files are not allowed. Please upload image files only.");
+    }
+  };
 
   useEffect(() => {
     getTeamData();
@@ -444,65 +473,7 @@ export default function CompetitionUser() {
                 {data && (
                   <div className="flex flex-col gap-2">
                     <p className="font-bold text-[16px] lg:text-[24px]">
-                      Proof of Enrollment
-                    </p>
-                    <div className="flex flex-wrap gap-2 items-center text-[#27AE60]">
-                      <Dropzone
-                        onFileSelected={(e: File) => {
-                          setEnrollFile(e);
-                          handleFileSelected(e);
-                          setFileName(e.name);
-                        }}
-                        onFileRejected={handleFileRejected}
-                        onFileDeleted={() => setEnrollFile(undefined)}
-                        name={data.enrollment}
-                      />
-                      <button
-                        onClick={() => {
-                          setDocType("enrollment");
-                          setIsNotice(true);
-                        }}
-                        className="bg-[#379392] px-2 py-2 text-center rounded-lg text-white block"
-                      >
-                        <BiUpload size={24} />
-                      </button>
-                      {data && data.enrollment_status == "under review" ? (
-                        <div className="flex items-center gap-2 text-[#E2B93B]">
-                          <PiWarningCircleFill size={24} />
-                          <p className="text-[12px] lg:text-[16px] font-normal">
-                            Under Review
-                          </p>
-                        </div>
-                      ) : data && data.enrollment_status == "accepted" ? (
-                        <div className="flex items-center gap-2 text-[#27AE60]">
-                          <BsFillCheckCircleFill size={24} />
-                          <p className="text-[12px] lg:text-[16px] font-normal">
-                            Accepted
-                          </p>
-                        </div>
-                      ) : data && data.enrollment_status == "rejected" ? (
-                        <div className="flex items-center gap-2 text-[#EB5757]">
-                          <MdCancel size={24} />
-                          <p className="text-[12px] lg:text-[16px] font-normal">
-                            Rejected - Please resubmit <br />
-                            Note : {data.enrollment_rejection}
-                          </p>
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-2 text-[#4F4F4F]">
-                          <MdCancel size={24} />
-                          <p className="text-[12px] lg:text-[16px] font-normal">
-                            No File
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-                {data && (
-                  <div className="flex flex-col gap-2">
-                    <p className="font-bold text-[16px] lg:text-[24px]">
-                      Student Card
+                      Proof of Active Student
                     </p>
                     <div className="flex flex-wrap gap-2 items-center text-[#27AE60]">
                       <Dropzone
