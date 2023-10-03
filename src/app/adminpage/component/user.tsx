@@ -105,7 +105,7 @@ export default function UserVerification() {
 
   useEffect(() => {
     if (token === undefined) {
-      router.push("/login");
+      router.push("/adminlogin");
     }
   }, [token, router]);
 
@@ -168,7 +168,7 @@ export default function UserVerification() {
               <th className="px-4 py-5">No</th>
               <th className="px-12">Nama Tim</th>
               <th className="px-12">Nama User</th>
-              <th className="px-6">Proof of Active Student</th>
+              <th className="px-6">Active Student</th>
               <th className="px-6">Self Portrait</th>
               <th className="px-6">Twibbon</th>
               <th className="px-6">Profile</th>
