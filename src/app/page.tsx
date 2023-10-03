@@ -1,36 +1,62 @@
 "use client";
 
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/component/Header/Header";
 import Footer from "@/component/Footer/Footer";
 import css from "@/app/landing.module.css";
 import Countdown from "@/component/Countdown/Countdown";
+import axios from "axios";
+import Cookies from "universal-cookie";
 import Image from "next/image";
 
+
 export default function Home() {
-  useLayoutEffect(() => {
-    console.log("window.innerHeight", window.innerHeight);
+  const cookieStore = new Cookies();
+  const user_id = cookieStore.get("user_id");
+  const BASE_URL =
+    process.env.NEXT_PUBLIC_STAGE != "staging"
+      ? "https://be-production-b6utdt2kwa-et.a.run.app"
+      : "https://be-staging-b6utdt2kwa-et.a.run.app";
 
-    // Function to set the CSS custom property for --vh
-    function setVhProperty() {
-      // Get the viewport height and convert it to a value for a vh unit
-      let vh = window.innerHeight * 0.01;
-      // Set the value of --vh custom property
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
+  const [disabled, setDisabled] = useState<boolean>(false);
+
+  const getProfile = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/profile/${user_id}`);
+
+      setDisabled(response.data.data.team_id !== null);
+    } catch (error) {
+      return null;
     }
+  };
 
-    // Set the initial value when the app loads
-    setVhProperty();
-
-    // Event listener to update the value when the viewport size changes
-    window.addEventListener("resize", setVhProperty);
-
-    // Cleanup the event listener on unmount to prevent memory leaks
-    return () => {
-      window.removeEventListener("resize", setVhProperty);
-    };
+  useLayoutEffect(() => {
+    getProfile();
   }, []);
+
+  // useLayoutEffect(() => {
+  //   console.log("window.innerHeight", window.innerHeight);
+
+  //   // Function to set the CSS custom property for --vh
+  //   function setVhProperty() {
+  //     // Get the viewport height and convert it to a value for a vh unit
+  //     let vh = window.innerHeight * 0.01;
+  //     // Set the value of --vh custom property
+  //     document.documentElement.style.setProperty("--vh", `${vh}px`);
+  //   }
+
+  //   // Set the initial value when the app loads
+  //   setVhProperty();
+
+  //   // Event listener to update the value when the viewport size changes
+  //   window.addEventListener("resize", setVhProperty);
+
+  //   // Cleanup the event listener on unmount to prevent memory leaks
+  //   return () => {
+  //     window.removeEventListener("resize", setVhProperty);
+  //   };
+  // }, []);
 
   const [activities, setActivities] = useState<string>("competetion"); // Added type annotation
 
@@ -163,8 +189,11 @@ export default function Home() {
             <p className={`${css.eventDate}`}>{date}</p>
             <div className={`${css.registerButtonDiv}`}>
               <button
-                className={`${css.registerButton}`}
+                className={`${css.registerButton} ${
+                  disabled ? "text-[white] opacity-75" : ""
+                }`}
                 onClick={registerHandler}
+                disabled={disabled}
               >
                 Register
               </button>
@@ -226,8 +255,8 @@ export default function Home() {
                 <div
                   className={`${css.CompetitionDescription} ${
                     activities == "competetion"
-                      ? "h-64 2xl:h-[22rem] transition-[height]"
-                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
+                      ? "h-68 2xl:h-[21rem] transition-[height]"
+                      : "2xl:h-[4.5rem] h-16 overflow-hidden transition-[height]"
                   }`}
                 >
                   <p
@@ -267,8 +296,8 @@ export default function Home() {
                 <div
                   className={`${css.businessCaseDescription} ${
                     activities == "bootcamp"
-                      ? "h-64 2xl:h-[22rem] transition-[height]"
-                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
+                      ? "h-68 2xl:h-[21rem] transition-[height]"
+                      : "2xl:h-[4.5rem] h-16 overflow-hidden transition-[height]"
                   }`}
                 >
                   <p
@@ -306,8 +335,8 @@ export default function Home() {
                 <div
                   className={`${css.miniChallengeDescription} ${
                     activities == "miniChallenge"
-                      ? "h-64 2xl:h-[22rem] transition-[height]"
-                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
+                      ? "h-68 2xl:h-[21rem] transition-[height]"
+                      : "2xl:h-[4.5rem] h-16 overflow-hidden transition-[height]"
                   }`}
                 >
                   <p
@@ -348,8 +377,8 @@ export default function Home() {
                 <div
                   className={`${css.webinarDescription} ${
                     activities == "webinar"
-                      ? "h-64 2xl:h-[22rem] transition-[height]"
-                      : "2xl:h-20 h-16 overflow-hidden transition-[height]"
+                      ? "h-68 2xl:h-[21rem] transition-[height]"
+                      : "2xl:h-[4.5rem] h-16 overflow-hidden transition-[height]"
                   }`}
                 >
                   <p
@@ -423,17 +452,17 @@ export default function Home() {
                     height="57.5vw"
                     width="57.5vw"
                   />
+                  <img
+                    src="images/landingpage/yellowDecor.svg"
+                    alt=""
+                    className="absolute -right-[2.5rem] -bottom-8 "
+                  />
+                  <img
+                    src="images/landingpage/greenDecor.svg"
+                    alt=""
+                    className="absolute right-10 -bottom-[5.5rem] "
+                  />
                 </div>
-                <img
-                  src="images/landingpage/yellowDecor.svg"
-                  alt=""
-                  className="absolute right-12 bottom-12 2xl:right-24"
-                />
-                <img
-                  src="images/landingpage/greenDecor.svg"
-                  alt=""
-                  className="absolute -bottom-4 right-32 2xl:right-[11rem]"
-                />
               </div>
             </div>
 
