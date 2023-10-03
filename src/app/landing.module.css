@@ -110,10 +110,11 @@
 .registerButton {
   /* padding: 0.5rem 3.2rem; */
   padding: 0.626vw 4.0064vw;
-  background-color: #379392;
+  background-color:#379392;
   border: none;
   border-radius: 6px;
   font-weight: bold;
+  font-size: 1.7rem;
 }
 
 .aboutBistLeagueSection {
@@ -241,9 +242,28 @@
   margin-top: 14vw;
 }
 
+@media (min-width: 1536px) {
+  .competitionImage {
+    width: 29.34375vw;
+    height: 29.34375vw;
+  }
+  .bootcampImage {
+    width: 29.34375vw;
+  }
+  .miniChallengeImage {
+    width: 29.34375vw;
+  }
+  .webinarImage {
+    width: 29.34375vw;
+  }
+  .registerButton {
+    font-size: 1.7rem;
+  }
+}
+
 @media (min-width: 1440px) {
   .activitiesHeader {
-    margin-top: 30vw;
+    margin-top: 24vw;
   }
 }
 
@@ -438,6 +458,7 @@
     border: none;
     border-radius: 6px;
     font-weight: bold;
+    font-size: 1.2rem;
   }
 
   .aboutBistLeagueSection {

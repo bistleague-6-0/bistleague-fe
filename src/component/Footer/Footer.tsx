@@ -48,7 +48,7 @@ const Footer = () => {
           </div>
         </div>
         <div className={css.socialMediaSection}>
-          <p className={css.emailBistLeague}>event@bistleague.com</p>
+          <p className={css.emailBistLeague}>bistleague@std.stei.itb.ac.id</p>
           <div className={css.socialMediaLogo}>
             <button className={css.svg} onClick={handleTikTok}>
               <svg
