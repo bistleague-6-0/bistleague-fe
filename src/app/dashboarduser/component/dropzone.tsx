@@ -32,7 +32,6 @@ const Dropzone: React.FC<DropzoneProps> = ({
         } else {
           if (onFileRejected) {
             onFileRejected(fileRejections);
-            toast.error("jangan pdf");
           }
         }
       } else if (acceptedFiles.length > 0) {
