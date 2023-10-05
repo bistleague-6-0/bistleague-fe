@@ -20,9 +20,6 @@ export default function Timeline() {
                 className={`mx-auto ${css.timelineVertical}`}
               />
             </div>
-            
-
-
         </div>
     )
 }
