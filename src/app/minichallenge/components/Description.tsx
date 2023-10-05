@@ -5,9 +5,9 @@ export default function Description() {
             <div className="text-lg lg:text-xl font-normal mt-9 lg:mt-14 text-justify">
                 <p>
                     BIST League has an annual mini challenge to help people realize the importance of technology. In BIST League 6.0, we have created a special video
-                    challenge called “Watch This!”. Watch This! challenge is designed to help people all around the world express their opinion through videos about
-                    “Transforming Business Success with Technology”. By creating this event, we hope that people will realize the positive influence of using technology
-                    in business. Total prize of this mini challenge is IDR 500.000,00 and the winning video will be posted on https://www.instagram.com/bistleague/.
+                    challenge called <span className="font-bold">“Watch This!”</span>. Watch This! challenge is designed to help people all around the world express their opinion through videos about
+                    <span className="font-bold">“Transforming Business Success with Technology”</span>. By creating this event, we hope that people will realize the positive influence of using technology
+                    in business. Total prize of this mini challenge is <span className="font-bold">IDR 500.000,00</span> and the winning video will be posted on <a href="https://www.instagram.com/bistleague/" target="_blank" className="font-bold underline">https://www.instagram.com/bistleague/</a>.
                     Rules and timeline are provided below. Best of luck, challengers.
                 </p>
             </div>
