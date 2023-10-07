@@ -1,3 +1,4 @@
+"use client"
 import HeroRound from "@images/minichallenge/BulatKiri.svg";
 import BataTopLeft from "@images/competition/hero/hero-bata-topleft.svg";
 import BataTopRight from "@images/competition/hero/hero-bata-topright.svg";
@@ -7,8 +8,10 @@ import BataBotRight from "@images/competition/hero/hero-bata-botright.svg";
 import KotakSatu from "@images/competition/hero/hero-kotak-satu.svg";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
+    const router = useRouter();
     return (
         <div className="bg-[url('/images/minichallenge/MiniChallenge-Mobile.svg')] lg:bg-[url('/images/minichallenge/MiniChallenge.svg')] h-[568px] lg:h-[630px] relative bg-cover overflow-hidden mt-20 py-24">
             <Image
@@ -54,6 +57,7 @@ export default function Hero() {
                 <div className="flex justify-center mt-10 lg:mt-20 lg:mb-5 z-10">
                     <button
                         className="px-20 lg:px-24 py-4 bg-[#F8A22D] rounded-lg text-base lg:text-2xl font-bold"
+                        onClick={() => router.push("/dashboarduser/minichallenge")}
                     >
                         Submit Link
                     </button>
