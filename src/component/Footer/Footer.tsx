@@ -36,7 +36,7 @@ const Footer = () => {
             <p className={css.headOfMainEvent}>Head of Main Event</p>
             <p>Akmal Jauhar</p>
             <p>akmaljauharsidqi@gmail.com</p>
-            <p>085156514184</p>
+            <p>082116748100</p>
           </div>
           <div className={css.competitionContact}>
             <p className={css.headOfCompetitionDivision}>
