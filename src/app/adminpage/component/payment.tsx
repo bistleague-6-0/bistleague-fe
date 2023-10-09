@@ -201,9 +201,9 @@ export default function PaymentVerification() {
             ))}
           </tbody>
         </table>
-        <div className="w-full flex justify-end mt-4">
-          <div className="flex items-center gap-3">{renderPage()}</div>
-        </div>
+      </div>
+      <div className="w-full flex justify-end mt-4">
+        <div className="flex items-center gap-3">{renderPage()}</div>
       </div>
       {popupUrl && (
         <>

@@ -10,9 +10,10 @@ import LoadingPage from "../component/loadingPage";
 export default function ChallengeUser() {
   const router = useRouter();
   const [data, setData] = useState<any | null>();
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(true);
   const [trigger, setTrigger] = useState(0);
   const [name, setName] = useState("");
+  const [cek, setCek] = useState(0);
   const cookie = new Cookies();
   const token = cookie.get("jwt_token");
   const refresh = cookie.get("refresh");
@@ -30,9 +31,41 @@ export default function ChallengeUser() {
   const getData = async () => {
     try {
       setisLoading(true);
-      const response = await axios.get(url + "challenge/" + user_id);
+      const response = await axios.get(url + "challenge", {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+      });
       console.log(response.data.data);
-      setData(response.data.data);
+      if (response.status == 200) {
+        setData(response.data.data);
+      } else {
+        const response2 = await axios.post(url + "refresh", {
+          refresh_token: refresh,
+          user_id: user_id,
+        });
+        if (response2.status == 404) {
+          router.push("/login");
+        } else {
+          cookie.set("jwt_token", response2.data.data.jwt_token, { path: "/" });
+          setTrigger(trigger + 1);
+        }
+      }
+    } catch (error) {
+      setCek(1);
+      console.log(cek);
+    }finally {
+      setisLoading(false);
+    }
+  };
+
+  const getProfileData = async () => {
+    try {
+      setisLoading(true);
+      const response = await axios.get(url + "profile/" + user_id);
+      console.log(response.data.data);
+      setName(response.data.data.full_name);
     } catch (error) {
       console.log(error);
     } finally {
@@ -43,7 +76,7 @@ export default function ChallengeUser() {
   const addData = async () => {
     if (token) {
       try {
-        const response = await axios.put(
+        const response = await axios.post(
           url + "challenge",
           {
             ig_username: data.ig_username,
@@ -58,10 +91,48 @@ export default function ChallengeUser() {
             },
           }
         );
+        console.log(response);
         setTrigger(trigger + 1);
-        toast.success("Profile edited");
+        toast.success("Challenge submitted");
+        setCek(0);
       } catch (error) {
-        toast.error("Please fill all fields");
+        toast.error("Submit error. Please try again");
+        const response2 = await axios.post(url + "refresh", {
+          refresh_token: refresh,
+          user_id: user_id,
+        });
+        if (response2.status == 404) {
+          router.push("/login");
+        } else {
+          cookie.set("jwt_token", response2.data.data.jwt_token, { path: "/" });
+        }
+      }
+    }
+  };
+
+  const editData = async () => {
+    if (token) {
+      try {
+        const response = await axios.put(
+          url + "challenge",
+          {
+            user_id: user_id,
+            ig_username: data.ig_username,
+            ig_content_url: data.ig_content_url,
+            tiktok_username: data.tiktok_username,
+            tiktok_content_url: data.tiktok_content_url,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setTrigger(trigger + 1);
+        toast.success("Challenge submitted");
+      } catch (error) {
+        toast.error("Submit error. Please try again");
         const response2 = await axios.post(url + "refresh", {
           refresh_token: refresh,
           user_id: user_id,
@@ -77,6 +148,10 @@ export default function ChallengeUser() {
 
   useEffect(() => {
     getData();
+  }, [trigger]);
+
+  useEffect(() => {
+    getProfileData();
   }, [trigger]);
 
   return (
@@ -100,12 +175,7 @@ export default function ChallengeUser() {
                   placeholder="Please enter your fullname"
                   className="w-full lg:w-72 xl:w-96 border-2 border-[#BDBDBD] rounded-sm px-2 lg:px-5 py-3"
                   value={name}
-                  onChange={(e) =>
-                    setData((prevData: any) => ({
-                      ...prevData,
-                      name: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className="flex flex-col">
@@ -190,7 +260,7 @@ export default function ChallengeUser() {
             <button
               type="submit"
               className="flex justify-center items-center text-white bg-[#F8A22D] rounded-lg px-20 py-3"
-              onClick={addData}
+              onClick={cek == 1 ? addData : editData}
             >
               Submit
             </button>
