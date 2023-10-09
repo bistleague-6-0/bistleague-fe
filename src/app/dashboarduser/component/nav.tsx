@@ -155,6 +155,7 @@ export default function NavUser({ active }: { active?: number }) {
           <p className="text-[18px] font-bold">Webinar</p>
         </div>
         <div
+          onClick={() => router.push("/dashboarduser/minichallenge")}
           className={`w-full flex items-center gap-2 rounded-lg ${
             active == 5
               ? "bg-[#F3EEE7] text-[#E22727]"
@@ -280,6 +281,7 @@ export default function NavUser({ active }: { active?: number }) {
                 Webinar
               </div>
               <div
+                onClick={() => router.push("/dashboarduser/minichallenge")}
                 className={`w-full gap-2 text-center ${
                   active == 5
                     ? "bg-[#F3EEE7] text-[#E22727]"

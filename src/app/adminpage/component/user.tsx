@@ -100,7 +100,7 @@ export default function UserVerification() {
   };
 
   useEffect(() => {
-    getData(1);
+    getData(currentPage);
   }, [trigger]);
 
   useEffect(() => {
@@ -120,8 +120,8 @@ export default function UserVerification() {
         key={i}
         className={
           currentPage === i
-            ? "text-center bg-[#379392] px-4 py-2 rounded-lg text-white text-[14px] font-bold"
-            : "text-center bg-transparent px-4 py-2 rounded-lg border-2 border-[#828282] text-[#828282] text-[14px] font-bold"
+            ? "text-center bg-[#379392] px-4 py-2 rounded-lg text-white text-[14px] font-bold cursor-pointer"
+            : "text-center bg-transparent px-4 py-2 rounded-lg border-2 border-[#828282] text-[#828282] text-[14px] font-bold cursor-pointer"
         }
         onClick={() => handlePageChange(i)}
       >
@@ -287,9 +287,9 @@ export default function UserVerification() {
             ))}
           </tbody>
         </table>
-        <div className="w-full flex justify-end mt-4">
-          <div className="flex items-center gap-3">{renderPage()}</div>
-        </div>
+      </div>
+      <div className="w-full flex justify-end mt-4">
+        <div className="flex items-center gap-3">{renderPage()}</div>
       </div>
       {popupUrl && (
         <>
@@ -399,11 +399,15 @@ export default function UserVerification() {
 
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">Email</p>
-                  <p className="text-black text-[18px] overflow-auto">{showProfile.email}</p>
+                  <p className="text-black text-[18px] overflow-auto">
+                    {showProfile.email}
+                  </p>
                 </div>
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">Age</p>
-                  <p className="text-black text-[18px] overflow-auto">{showProfile.age}</p>
+                  <p className="text-black text-[18px] overflow-auto">
+                    {showProfile.age}
+                  </p>
                 </div>
 
                 <div className="flex flex-col">
@@ -442,7 +446,9 @@ export default function UserVerification() {
 
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">Major</p>
-                  <p className="text-black text-[18px] overflow-auto">{showProfile.major}</p>
+                  <p className="text-black text-[18px] overflow-auto">
+                    {showProfile.major}
+                  </p>
                 </div>
                 <div className="flex flex-col">
                   <p className="font-bold text-[#379392] text-[24px]">
