@@ -4,9 +4,11 @@ import { FaWallet } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { MdClose } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { LuArrowUpRightFromCircle } from "react-icons/lu";
 import PaymentVerification from "./component/payment";
 import { useState } from "react";
 import UserVerification from "./component/user";
+import MiniChallenge from "./component/challenge";
 
 export default function AdnminPage() {
   const [index, setIndex] = useState(0);
@@ -52,6 +54,19 @@ export default function AdnminPage() {
               Verification
             </p>
           </div>
+          <div
+            className={`${
+              index == 2 ? "bg-[#F3EEE7] text-[#379392]" : "text-white"
+            } w-full text-[20px] rounded-lg px-2 py-3 mt-2 flex items-center justify-center gap-5 cursor-pointer`}
+            onClick={() => setIndex(2)}
+          >
+            <LuArrowUpRightFromCircle size={28} />
+            <p className="font-extrabold">
+              Mini
+              <br />
+              Challenge
+            </p>
+          </div>
         </div>
         <div className="w-full h-16 bg-[#379392] flex items-center justify-between lg:hidden px-5 py-4 text-[#F3EEE7]">
           <div className="flex items-center gap-2 text-[18px] font-bold">
@@ -61,10 +76,15 @@ export default function AdnminPage() {
                 <FaWallet size={24} />
                 <p>Payment Verification</p>
               </>
-            ) : (
+            ) : index == 1 ? (
               <>
                 <CgProfile size={28} />
                 <p>User Verification</p>
+              </>
+            ) : (
+              <>
+                <LuArrowUpRightFromCircle size={28} />
+                <p>Mini Challenge</p>
               </>
             )}
           </div>
@@ -113,6 +133,19 @@ export default function AdnminPage() {
                 >
                   User Verification
                 </div>
+                <div
+                  onClick={() => {
+                    setIndex(2);
+                    changeHamburger();
+                  }}
+                  className={`w-full gap-2 text-center ${
+                    index == 1
+                      ? "bg-[#F3EEE7] text-[#379392]"
+                      : "bg-transparent text-white"
+                  } text-[18px] font-bold cursor-pointer py-2 hover:bg-[#F3EEE7] hover:text-[#379392]`}
+                >
+                  Mini Challenge
+                </div>
               </div>
             </div>
           </>
@@ -125,7 +158,13 @@ export default function AdnminPage() {
             <CgProfile size={32} />
           </div>
           <div className="w-full">
-            {index == 0 ? <PaymentVerification /> : <UserVerification />}
+            {index == 0 ? (
+              <PaymentVerification />
+            ) : index == 1 ? (
+              <UserVerification />
+            ) : (
+              <MiniChallenge />
+            )}
           </div>
         </div>
       </div>

@@ -87,12 +87,12 @@ export default function PaymentVerification() {
   };
 
   useEffect(() => {
-    getData(1);
+    getData(currentPage);
   }, [trigger]);
 
   useEffect(() => {
     if (token === undefined) {
-      router.push("/login");
+      router.push("/adminlogin");
     }
   }, [token, router]);
 
@@ -107,8 +107,8 @@ export default function PaymentVerification() {
         key={i}
         className={
           currentPage === i
-            ? "text-center bg-[#379392] px-4 py-2 rounded-lg text-white text-[14px] font-bold"
-            : "text-center bg-transparent px-4 py-2 rounded-lg border-2 border-[#828282] text-[#828282] text-[14px] font-bold"
+            ? "text-center bg-[#379392] px-4 py-2 rounded-lg text-white text-[14px] font-bold cursor-pointer"
+            : "text-center bg-transparent px-4 py-2 rounded-lg border-2 border-[#828282] text-[#828282] text-[14px] font-bold cursor-pointer"
         }
         onClick={() => handlePageChange(i)}
       >
@@ -201,9 +201,9 @@ export default function PaymentVerification() {
             ))}
           </tbody>
         </table>
-        <div className="w-full flex justify-end mt-4">
-          <div className="flex items-center gap-3">{renderPage()}</div>
-        </div>
+      </div>
+      <div className="w-full flex justify-end mt-4">
+        <div className="flex items-center gap-3">{renderPage()}</div>
       </div>
       {popupUrl && (
         <>
