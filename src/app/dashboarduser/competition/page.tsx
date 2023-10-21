@@ -34,7 +34,7 @@ export default function CompetitionUser() {
   const [isFileLoading, setisFileLoading] = useState(false);
   const [trigger, setTrigger] = useState(0);
 
-  const [date, setDate] = useState("October 22, 2023 23:59:59");
+  const [date, setDate] = useState("October 22, 2023 00:00:00");
   const [fase, setFase] = useState(1);
 
   const [base64, setBase64] = useState("");
@@ -83,15 +83,15 @@ export default function CompetitionUser() {
     const temp = fase + 1;
     setFase(temp);
     if (fase == 2) {
-      setDate("November 5, 2023 23:59:59");
+      setDate("October 30, 2023 00:00:00");
     } else if (fase == 3) {
-      setDate("November 19, 2023 00:00:00");
+      setDate("November 5, 2023 23:59:59");
     } else if (fase == 4) {
-      setDate("December 2, 2023 17:59:59");
+      setDate("November 19, 2023 00:00:00");
     } else if (fase == 5) {
-      setDate("December 3, 2023 06:00:00");
-    } else {
-      setDate("December 20, 2023 00:00:00");
+      setDate("December 2, 2023 00:00:00");
+    } else if (fase == 6){
+      setDate("December 3, 2023 23:59:59");
     }
   }
 
@@ -255,14 +255,14 @@ export default function CompetitionUser() {
                   {fase == 1
                     ? "Competition starts in"
                     : fase == 3
-                    ? "Preliminary Submission Closes in"
+                    ? "Preliminary Submission Starts in"
                     : fase == 4
-                    ? "Finalist Announcement in"
+                    ? "Preliminary Submission Closes in"
                     : fase == 5
-                    ? "Final starts in"
+                    ? "Finalist Announcement in"
                     : fase == 6
-                    ? "Submission Final close in"
-                    : ""}
+                    ? "Final starts in"
+                    : fase == 7 ? "Submission Final close in" : ""}
                 </p>
                 <CountDown date={date} />
                 <div className="flex justify-center w-full gap-4 mt-5">
@@ -275,16 +275,29 @@ export default function CompetitionUser() {
                       )
                     }
                   >
-                    {fase >= 1 && fase <= 3
+                    {fase >= 1 && fase <= 4
                       ? "Download Guidebook"
                       : "Download Final Guidebook"}
                   </button>
                   <button
                     className={`${
-                      fase == 1 || fase == 5 ? "hidden" : ""
+                      fase == 4 ? "" : "hidden"
                     } flex justify-center bg-[#379392] rounded-lg text-[12px] lg:text-[16px] text-white font-extrabold px-6 lg:px-14 py-3`}
                   >
                     Upload Submission
+                  </button>
+                  <button
+                    className={`${
+                      fase == 3 || fase == 4 ? "" : "hidden"
+                    } flex justify-center bg-[#379392] rounded-lg text-[12px] lg:text-[16px] text-white font-extrabold px-6 lg:px-14 py-3`}
+                    onClick={() => {data && data.payment_status == "accepted" ? window.open(
+                      "https://drive.google.com/file/d/1jOqp8mn8a_5nVc_-5JuUkGg5nNpWRtmO/view",
+                      "_blank"
+                    ): toast.error("Please complete payment first to open case")}
+                      
+                    }
+                  >
+                    Download Case
                   </button>
                 </div>
               </div>
