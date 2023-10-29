@@ -203,7 +203,27 @@ export default function PaymentVerification() {
         </table>
       </div>
       <div className="w-full flex justify-end mt-4">
+      <div
+          className={
+            currentPage > 1
+              ? "mr-3 text-center bg-transparent px-4 py-2 rounded-lg border-2 border-[#828282] text-[#828282] text-[14px] font-bold cursor-pointer"
+              : "hidden"
+          }
+          onClick={() => handlePageChange(currentPage - 1)}
+        >
+          {"<"}
+        </div>
         <div className="flex items-center gap-3">{renderPage()}</div>
+        <div
+          className={
+            currentPage < totalPages
+              ? "ml-3 text-center bg-transparent px-4 py-2 rounded-lg border-2 border-[#828282] text-[#828282] text-[14px] font-bold cursor-pointer"
+              : "hidden"
+          }
+          onClick={() => handlePageChange(currentPage + 1)}
+        >
+          {">"}
+        </div>
       </div>
       {popupUrl && (
         <>
