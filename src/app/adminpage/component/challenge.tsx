@@ -127,10 +127,10 @@ export default function MiniChallenge() {
                 </td>
                 <td className="px-12 py-10 flex justify-center items-center">
                   <button
-                    className={`rounded-lg flex items-center gap-1 text-white px-4 py-2 ${row.ig_content_url? "bg-[#40A89F]" : "bg-[#BDBDBD]"}`}
-                    onClick={() =>
-                      window.open(row.ig_content_url)
-                    }
+                    className={`rounded-lg flex items-center gap-1 text-white px-4 py-2 ${
+                      row.ig_content_url ? "bg-[#40A89F]" : "bg-[#BDBDBD]"
+                    }`}
+                    onClick={() => window.open(row.ig_content_url)}
                   >
                     <p className="text-white">Open</p>
                     <MdOpenInNew />
@@ -141,10 +141,10 @@ export default function MiniChallenge() {
                 </td>
                 <td className="px-12 py-10 flex justify-center items-center">
                   <button
-                    className={`rounded-lg flex items-center gap-1 text-white px-4 py-2 ${row.tiktok_content_url? "bg-[#40A89F]" : "bg-[#BDBDBD]"}`}
-                    onClick={() =>
-                      window.open(row.tiktok_content_url)
-                    }
+                    className={`rounded-lg flex items-center gap-1 text-white px-4 py-2 ${
+                      row.tiktok_content_url ? "bg-[#40A89F]" : "bg-[#BDBDBD]"
+                    }`}
+                    onClick={() => window.open(row.tiktok_content_url)}
                   >
                     <p className="text-white">Open</p>
                     <MdOpenInNew />
@@ -156,7 +156,27 @@ export default function MiniChallenge() {
         </table>
       </div>
       <div className="w-full flex justify-end mt-4">
+        <div
+          className={
+            currentPage > 1
+              ? "mr-3 text-center bg-transparent px-4 py-2 rounded-lg border-2 border-[#828282] text-[#828282] text-[14px] font-bold cursor-pointer"
+              : "hidden"
+          }
+          onClick={() => handlePageChange(currentPage - 1)}
+        >
+          {"<"}
+        </div>
         <div className="flex items-center gap-3">{renderPage()}</div>
+        <div
+          className={
+            currentPage < totalPages
+              ? "ml-3 text-center bg-transparent px-4 py-2 rounded-lg border-2 border-[#828282] text-[#828282] text-[14px] font-bold cursor-pointer"
+              : "hidden"
+          }
+          onClick={() => handlePageChange(currentPage + 1)}
+        >
+          {">"}
+        </div>
       </div>
     </>
   );
