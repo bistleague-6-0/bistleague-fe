@@ -90,7 +90,7 @@ export default function CompetitionUser() {
       setDate("November 19, 2023 00:00:00");
     } else if (fase == 5) {
       setDate("December 2, 2023 00:00:00");
-    } else if (fase == 6){
+    } else if (fase == 6) {
       setDate("December 3, 2023 23:59:59");
     }
   }
@@ -262,7 +262,9 @@ export default function CompetitionUser() {
                     ? "Finalist Announcement in"
                     : fase == 6
                     ? "Final starts in"
-                    : fase == 7 ? "Submission Final close in" : ""}
+                    : fase == 7
+                    ? "Submission Final close in"
+                    : ""}
                 </p>
                 <CountDown date={date} />
                 <div className="flex justify-center w-full gap-4 mt-5">
@@ -280,8 +282,11 @@ export default function CompetitionUser() {
                       : "Download Final Guidebook"}
                   </button>
                   <button
+                    onClick={() => router.push("/submission")}
                     className={`${
-                      fase == 4 ? "" : "hidden"
+                      fase == 4 && data.payment_status == "accepted"
+                        ? ""
+                        : "hidden"
                     } flex justify-center bg-[#379392] rounded-lg text-[12px] lg:text-[16px] text-white font-extrabold px-6 lg:px-14 py-3`}
                   >
                     Upload Submission
@@ -290,12 +295,16 @@ export default function CompetitionUser() {
                     className={`${
                       fase == 3 || fase == 4 ? "" : "hidden"
                     } flex justify-center bg-[#379392] rounded-lg text-[12px] lg:text-[16px] text-white font-extrabold px-6 lg:px-14 py-3`}
-                    onClick={() => {data && data.payment_status == "accepted" ? window.open(
-                      "https://drive.google.com/file/d/1jOqp8mn8a_5nVc_-5JuUkGg5nNpWRtmO/view",
-                      "_blank"
-                    ): toast.error("Please complete payment first to open case")}
-                      
-                    }
+                    onClick={() => {
+                      data && data.payment_status == "accepted"
+                        ? window.open(
+                            "https://drive.google.com/file/d/1jOqp8mn8a_5nVc_-5JuUkGg5nNpWRtmO/view",
+                            "_blank"
+                          )
+                        : toast.error(
+                            "Please complete payment first to open case"
+                          );
+                    }}
                   >
                     Download Case
                   </button>
@@ -455,7 +464,7 @@ export default function CompetitionUser() {
                           setIsNotice(true);
                         }}
                       >
-                        {isFileLoading && docType == 'payment'? (
+                        {isFileLoading && docType == "payment" ? (
                           <div role="status">
                             <svg
                               aria-hidden="true"
@@ -615,7 +624,7 @@ export default function CompetitionUser() {
                         }}
                         className="bg-[#379392] px-2 py-2 text-center rounded-lg text-white block"
                       >
-                        {isFileLoading && docType == "self_portrait"? (
+                        {isFileLoading && docType == "self_portrait" ? (
                           <div role="status">
                             <svg
                               aria-hidden="true"
@@ -695,7 +704,7 @@ export default function CompetitionUser() {
                         }}
                         className="bg-[#379392] px-2 py-2 text-center rounded-lg text-white block"
                       >
-                        {isFileLoading && docType == "twibbon"? (
+                        {isFileLoading && docType == "twibbon" ? (
                           <div role="status">
                             <svg
                               aria-hidden="true"
