@@ -248,7 +248,7 @@ export default function CompetitionUser() {
               </p>
               <div
                 className={`w-full bg-white flex flex-col items-center rounded-lg gap-2 py-4 px-5 lg:px-2 ${
-                  fase == 4 || fase == 7 ? "hidden" : ""
+                  fase == 7 ? "hidden" : ""
                 }`}
               >
                 <p className="text-[16px] lg:text-[24px] text-center mb-2">
