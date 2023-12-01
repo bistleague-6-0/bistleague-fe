@@ -89,7 +89,7 @@ export default function CompetitionUser() {
     } else if (fase == 4) {
       setDate("November 19, 2023 00:00:00");
     } else if (fase == 5) {
-      setDate("December 2, 2023 00:00:00");
+      setDate("December 1, 2023 00:00:00");
     } else if (fase == 6) {
       setDate("December 3, 2023 23:59:59");
     }
@@ -293,7 +293,9 @@ export default function CompetitionUser() {
                   </button>
                   <button
                     className={`${
-                      fase == 3 || fase == 4 ? "" : "hidden"
+                      fase == 3 || fase == 4 || fase == 5 || fase == 6
+                        ? ""
+                        : "hidden"
                     } flex justify-center bg-[#379392] rounded-lg text-[12px] lg:text-[16px] text-white font-extrabold px-6 lg:px-14 py-3`}
                     onClick={() => {
                       data && data.payment_status == "accepted"
