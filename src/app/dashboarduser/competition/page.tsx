@@ -298,7 +298,7 @@ export default function CompetitionUser() {
                     onClick={() => {
                       data && data.payment_status == "accepted"
                         ? window.open(
-                            "https://drive.google.com/file/d/1jOqp8mn8a_5nVc_-5JuUkGg5nNpWRtmO/view",
+                            "https://drive.google.com/file/d/1vHYr2JlWp--Wpb2qosd4tqZ8J5AhS71l/view?usp=drive_link",
                             "_blank"
                           )
                         : toast.error(
