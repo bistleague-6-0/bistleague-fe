@@ -8,7 +8,7 @@ import Image from "next/image";
 import BulatKiri from "@images/submission/left.svg";
 import Cookies from "universal-cookie";
 import Link from "next/link";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 interface SubmittedData {
@@ -29,14 +29,14 @@ interface SubmissionProps {
   submissionData: SubmissionData;
   jwt_token: string;
   refresh: string;
-  user_id: string
+  user_id: string;
 }
 
 export default function Submission({
   submissionData,
   jwt_token,
   refresh,
-  user_id
+  user_id,
 }: SubmissionProps) {
   const router = useRouter();
   const cookie = new Cookies();
@@ -62,7 +62,7 @@ export default function Submission({
 
   const submitFile = async () => {
     const submittedData: SubmittedData = {
-      doc_type: "submission_1",
+      doc_type: "submission_2",
       document: base64,
       document_name: selectedFile,
     };
@@ -77,9 +77,9 @@ export default function Submission({
           },
         }
       );
-
-      router.refresh()
-      toast.success('Submit successfull');
+      console.log(submit);
+      router.refresh();
+      toast.success("Submit successfull");
       setSelectedFile("No file selected");
     } catch (error) {
       const errorResponse = error as {
@@ -92,7 +92,7 @@ export default function Submission({
         });
         cookie.remove("jwt_token", { path: "/" });
         cookie.set("jwt_token", response2.data.data.jwt_token, { path: "/" });
-        router.refresh()
+        router.refresh();
       }
     }
   };
@@ -101,39 +101,39 @@ export default function Submission({
       <div className="flex text-[#F3EEE7] items-center justify-between mt-8 lg:mt-0 relative z-10">
         <Link href="/competition" className="flex items-center gap-3">
           <AiOutlineArrowLeft className="text-2xl lg:text-base" />
-          <h1 className="hidden lg:inline font-bold text-base">
+          <h1 className="hidden text-base font-bold lg:inline">
             Back to Competition
           </h1>
-        </Link >
-        <h1 className="w-full self-center font-extrabold text-2xl text-center lg:hidden">
+        </Link>
+        <h1 className="self-center w-full text-2xl font-extrabold text-center lg:hidden">
           Submission
         </h1>
       </div>
 
-      <h1 className="text-center text-white text-5xl font-bold mb-16 mt-8 hidden lg:block">
+      <h1 className="hidden mt-8 mb-16 text-5xl font-bold text-center text-white lg:block">
         Submission
       </h1>
 
       <div className="flex items-center justify-center my-8">
         <div className="bg-white py-6 px-5 rounded-lg max-w-[540px] z-10">
           {!submissionData ? (
-            <h1 className="text-center text-sm lg:text-xl py-16 px-3 lg:px-10 lg:py-0 lg:pt-16 lg:pb-28 ">
+            <h1 className="px-3 py-16 text-sm text-center lg:text-xl lg:px-10 lg:py-0 lg:pt-16 lg:pb-28 ">
               Preliminary submission must be submitted in PDF format with a
               maximum size of 10MB.
             </h1>
           ) : (
             <div className="lg:px-12 lg:pt-4 lg:pb-10">
-              <h1 className="text-center text-sm lg:text-xl mb-5">
+              <h1 className="mb-5 text-sm text-center lg:text-xl">
                 You may do another submission until the deadline.
               </h1>
-              <h1 className="text-center text-sm lg:text-xl mb-5">
+              <h1 className="mb-5 text-sm text-center lg:text-xl">
                 Preliminary submission must be submitted in PDF format with a
                 maximum size of 10MB.
               </h1>
-              <h1 className="text-center text-sm lg:text-xl">
+              <h1 className="text-sm text-center lg:text-xl">
                 Last submission:
               </h1>
-              <h1 className="text-center text-sm font-bold lg:text-xl mb-6">
+              <h1 className="mb-6 text-sm font-bold text-center lg:text-xl">
                 {submissionData.submission_lastupdate}
               </h1>
             </div>
@@ -142,9 +142,7 @@ export default function Submission({
           <div className="border border-[#BDBDBD] mb-4 lg:mx-16 p-3.5 rounded text-sm font-medium flex items-center justify-between">
             <Link
               href={submissionData?.submission_url || ""}
-              className={
-                !submissionData ? "text-[#BDBDBD]" : "text-[#413687]"
-              }
+              className={!submissionData ? "text-[#BDBDBD]" : "text-[#413687]"}
             >
               {submissionData ? submissionData.submission_filename : "Empty"}
             </Link>
@@ -173,12 +171,15 @@ export default function Submission({
               {!submissionData ? "Upload" : "Reupload"}
             </label>
           </div>
-          <div className="mb-4 lg:mx-16 rounded text-sm font-bold flex items-center">
+          <div className="flex items-center mb-4 text-sm font-bold rounded lg:mx-16">
             <button
               type="submit"
               className="bg-[#413687] px-12 py-3 lg:px-24 rounded-lg cursor-pointer w-full"
             >
-              <h1 className="text-white text-center font-bold lg:text-xl" onClick={submitFile}>
+              <h1
+                className="font-bold text-center text-white lg:text-xl"
+                onClick={submitFile}
+              >
                 Submit
               </h1>
             </button>
@@ -188,7 +189,7 @@ export default function Submission({
       <Image
         src={BulatKiri}
         alt="Hero Round"
-        className="scale-75 lg:scale-100 absolute bottom-14 -left-20 lg:bottom-0 lg:left-0 z-0"
+        className="absolute z-0 scale-75 lg:scale-100 bottom-14 -left-20 lg:bottom-0 lg:left-0"
       />
     </div>
   );
