@@ -12,7 +12,7 @@ export default async function SubmissionPage() {
   const jwt_token = cookieStore.get("jwt_token")?.value as string;
   const refresh = cookieStore.get("refresh")?.value as string;
   const user_id = cookieStore.get("user_id")?.value as string;
-  
+
   const BASE_URL =
     process.env.NEXT_PUBLIC_STAGE != "staging"
       ? "https://be-production-b6utdt2kwa-et.a.run.app"
@@ -34,7 +34,7 @@ export default async function SubmissionPage() {
 
   const getLastSubmission = async () => {
     try {
-      const response = await axios.get(BASE_URL + "/team/submission/1", {
+      const response = await axios.get(BASE_URL + "/team/submission/2", {
         headers: {
           Authorization: `Bearer ${jwt_token}`,
         },
