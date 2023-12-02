@@ -80,6 +80,7 @@ export default function CompetitionUser() {
   };
 
   if (now > target) {
+    // console.log(now, target)
     const temp = fase + 1;
     setFase(temp);
     if (fase == 2) {
@@ -91,7 +92,8 @@ export default function CompetitionUser() {
     } else if (fase == 5) {
       setDate("December 1, 2023 00:00:00");
     } else if (fase == 6) {
-      setDate("December 3, 2023 23:59:59");
+      // console.log("now : ", now, "target : ", target);
+      setDate("December 3, 2023 06:00:00");
     }
   }
 
@@ -248,7 +250,7 @@ export default function CompetitionUser() {
               </p>
               <div
                 className={`w-full bg-white flex flex-col items-center rounded-lg gap-2 py-4 px-5 lg:px-2 ${
-                  fase == 7 ? "hidden" : ""
+                  fase != 7 ? "hidden" : ""
                 }`}
               >
                 <p className="text-[16px] lg:text-[24px] text-center mb-2">
@@ -268,11 +270,11 @@ export default function CompetitionUser() {
                 </p>
                 <CountDown date={date} />
                 <div className="flex justify-center w-full gap-4 mt-5">
-                  <button
+                  {/* <button
                     className="flex justify-center bg-white border-2 border-[#379392] rounded-lg text-[12px] lg:text-[16px] text-[#379392] font-extrabold px-6 lg:px-12 py-3"
                     onClick={() =>
                       window.open(
-                        "https://drive.google.com/file/d/1_ccLEBqGZ1BZo8C6Rf9VclMyBgh-xLGL/view",
+                        "https://drive.google.com/file/d/1vHYr2JlWp--Wpb2qosd4tqZ8J5AhS71l/view?usp=drive_link",
                         "_blank"
                       )
                     }
@@ -280,11 +282,12 @@ export default function CompetitionUser() {
                     {fase >= 1 && fase <= 4
                       ? "Download Guidebook"
                       : "Download Final Guidebook"}
-                  </button>
+                  </button> */}
                   <button
                     onClick={() => router.push("/submission")}
                     className={`${
-                      fase == 4 && data.payment_status == "accepted"
+                      (fase == 4 || fase == 7) &&
+                      data.payment_status == "accepted"
                         ? ""
                         : "hidden"
                     } flex justify-center bg-[#379392] rounded-lg text-[12px] lg:text-[16px] text-white font-extrabold px-6 lg:px-14 py-3`}
@@ -293,9 +296,7 @@ export default function CompetitionUser() {
                   </button>
                   <button
                     className={`${
-                      fase == 3 || fase == 4 || fase == 5 || fase == 6
-                        ? ""
-                        : "hidden"
+                      fase == 3 || fase == 4 || fase == 7 ? "" : "hidden"
                     } flex justify-center bg-[#379392] rounded-lg text-[12px] lg:text-[16px] text-white font-extrabold px-6 lg:px-14 py-3`}
                     onClick={() => {
                       data && data.payment_status == "accepted"
